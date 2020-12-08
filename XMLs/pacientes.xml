@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Pacientes>
+        <Paciente>
+            <registro>665241</registro>
+            <email>x@x</email>
+            <senha>x</senha>
+            <nome>xxxxxxxxx</nome>
+            <genero>O</genero>
+            <telefone>53999999999</telefone>
+            <cpf>028-901-590-19</cpf>
+            <idade>31</idade>
+            <endereco>ddddddd</endereco>
+        </Paciente>
+        
+    </Pacientes>

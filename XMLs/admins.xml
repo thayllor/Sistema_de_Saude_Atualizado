@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Admins>
+        <Admin>
+            <registro>1</registro>
+            <email>x@x</email>
+            <senha>x</senha>
+            <nome>xxxxxxxxx</nome>
+        </Admin>
+
+</Admins>

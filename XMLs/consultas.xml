@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Consultas>
+        <Consulta>
+            <registro>665641</registro>
+            <medico>665491</medico>
+            <paciente>665241</paciente>
+            <receita>Tylenol</receita>
+            <observacao>Ok</observacao>
+            <data>2020-08-20</data>
+        </Consulta>
+</Consultas>

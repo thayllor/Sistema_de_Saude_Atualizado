@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Laboratorios>
+        <Laboratorio>
+            <registro>65</registro>
+            <email>x@x</email>
+            <senha>x</senha>
+            <nome>Não Sei</nome>
+            <endereco>oidsoi</endereco>
+            <telefone>xxxxxxx</telefone>
+            <cnpj>77</cnpj>
+            <tiposExames>x,y,e.9</tiposExames>
+        </Laboratorio>
+        <Laboratorio>
+            <registro>66</registro>
+            <email>y</email>
+            <senha>y</senha>
+            <nome>Não Sei2</nome>
+            <endereco>gesgesgesges</endereco>
+            <telefone>999999</telefone>
+            <cnpj>66</cnpj>
+            <tiposExames>x,l,e</tiposExames>
+        </Laboratorio>
+<Laboratorio><registro>1605836563</registro><email>x@xx</email><senha>xdxd</senha><nome>teste</nome><endereco>teste</endereco><telefone>53999691999</telefone><cnpj>32190809000110</cnpj><tiposExames> x,y,z</tiposExames></Laboratorio></Laboratorios>

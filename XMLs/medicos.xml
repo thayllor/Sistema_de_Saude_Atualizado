@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Medicos>
+        <Medico>
+            <registro>66541</registro>
+            <nome>Joãozinho</nome>
+            <idade>57</idade>
+            <sexo>Masculino</sexo>
+            <profissao>Desempregado</profissao>
+            <salario>0</salario>
+        </Medico>
+        <Medico>
+            <registro>665491</registro>
+            <nome>Joãozinha</nome>
+            <idade>54</idade>
+            <sexo>Feminino</sexo>
+            <profissao>Desempregada</profissao>
+            <salario>0</salario>
+        </Medico>
+    <Medico><registro>1598659609</registro><email>x@x</email><senha>x</senha><nome>x</nome><endereco>qergasd</endereco><telefone>2547861153</telefone><crm>x</crm><especialidade>wergf</especialidade><idade>1</idade></Medico></Medicos>
