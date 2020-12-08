@@ -10,7 +10,6 @@
     <script src="../../JS/jquery-3.5.1.min.js"></script>
     <script src="../../JS/funcoes.js"></script>
     <script src="../../JS/Admin/cadastro_laboratorio.js"></script>
-    
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 
@@ -70,6 +69,7 @@
             $xml_novo_lab->addChild('cnpj', $cnpj);
             $xml_novo_lab->addChild('tiposExames', $tiposExames);
             $xml->saveXML("../../XMLs/laboratorios.xml");
+            redirect("index.php");
         }
     }
     ?>
@@ -78,7 +78,7 @@
 <nav class="navbar navbar-expand-sm bg-dark navbar-dark">
   <ul class="navbar-nav">
     <li class="navbar-text">
-    Sistema de Plano de Saúde
+        Nome do sistema
     </li>
   </ul>
 </nav>
@@ -90,42 +90,43 @@
     <h1>Cadastro de Laboratorios </h1>
     
     
-    <form method="post" id="login_form" action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]); ?>">
+    <form method="post" id="c_laboratorio_form" action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]); ?>">
         <div class="form-row">
             <div class="col">
                 <label for="nome">Nome:</label>
-                <input type="text" class="form-control" id="nome" placeholder="Digite o nome aqui" name="nome" required> <br><br>
                 <span class="error" id="nomeErr"><?php echo $nomeErr; ?></span><br>
+                <input type="text" class="form-control" id="nome" placeholder="Digite o nome aqui" name="nome" required value="<?php echo $nome; ?>"> <br><br>
             </div>
             <div class="col">
                 <label for="tiposExames">Tipos de exame:</label>
-                <input type="text" class="form-control" id="tiposExames" placeholder="Digite os tipos de exame que o laboratorio tem aqui" name="tiposExames" required> <br><br>
+                <input type="text" class="form-control" id="tiposExames" placeholder="Digite os tipos de exame que o laboratorio tem aqui" name="tiposExames" required value="<?php echo $tiposExames; ?>"> <br><br>
             </div>
         </div>
 
         <div class="form-row">
             <div class="col">
                 <label for="cnpj">CNPJ:</label>
-                <input type="text" class="form-control" id="crm" placeholder="Digite o CNPJ aqui" name="cnpj" required> <br><br>
                 <span class="error" id="cnpjErr"><?php echo $cnpjErr; ?></span><br>
+                <input type="text" class="form-control" id="cnpj" placeholder="Digite o CNPJ aqui" name="cnpj" required value="<?php echo $cnpj; ?>"> <br><br>
             </div>
             <div class="col">
                 <label for="telefone">Telefone:</label>
-                <input type="text" class="form-control" id="telefone" placeholder="Digite o telefone aqui" name="telefone" required> <br><br>
                 <span class="error" id="telefoneErr"><?php echo $telefoneErr; ?></span><br>
+                <input type="text" class="form-control" id="telefone" placeholder="Digite o telefone aqui" name="telefone" required value="<?php echo $telefone; ?>"> <br><br>
             </div>
         </div>
 
         <div class="form-row">
             <div class="col">
                 <label for="email">Email:</label>
-                <input type="text" class="form-control" id="email" placeholder="Digite o email aqui" name="email" required> <br><br>
-                <span class="error" id="emailErr"><?php echo $emailErr; ?></span><br>
+                <span class="error" id="emailErr"><?php echo $emailErr; ?></span><br> 
+                <input type="text" class="form-control" id="email" placeholder="Digite o email aqui" name="email" required value="<?php echo $email; ?>"> <br><br>
+                
             </div>
             
             <div class="col">
                 <label for="endereco">Endereço:</label>
-                <input type="text" class="form-control" id="endereco" placeholder="Digite o endereço aqui" name="endereco" required> <br><br>
+                <input type="text" class="form-control" id="endereco" placeholder="Digite o endereço aqui" name="endereco" required value="<?php echo $endereco; ?>"> <br><br>
 
             </div>
             
@@ -134,11 +135,11 @@
         <div class="form-row">
             <div class="col">
                 <label for="senha">Senha:</label>
-                <input type="password" class="form-control" id="senha" placeholder="Digite a senha aqui" name="senha" required> <br><br>
+                <input type="password" class="form-control" id="senha" placeholder="Digite a senha aqui" name="senha" required > <br><br>
             </div>
             <div class="col">
                 <label for="csenha">Confirmar senha:</label>
-                <input type="password" class="form-control" id="csenha" placeholder="Repita a senha aqui" name="csenha" required> <br><br>
+                <input type="password" class="form-control" id="csenha" placeholder="Repita a senha aqui" name="csenha" required > <br><br>
             </div>
         </div>
 

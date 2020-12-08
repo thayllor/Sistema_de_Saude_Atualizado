@@ -1,5 +1,5 @@
 $(document).ready(function () {
-  $("#login_form").submit(function (event) {
+  $("#c_medico_form").submit(function (event) {
     let err = false;
     if (!valida_telefone($("#telefone").val())) {
       $("#telefoneErr").text("telefone invalido");

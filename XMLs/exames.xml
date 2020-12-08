@@ -1,4 +1,27 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <Exames>
-
-</Exames>
+        <Exame>
+            <registro>665641</registro>
+            <laboratorio>65</laboratorio>
+            <paciente>665241</paciente>
+            <tipoExame>Não Sei</tipoExame>
+            <resultado>xxxxxxx</resultado>
+            <data>0</data>
+        </Exame>
+        <Exame>
+            <registro>665642</registro>
+            <laboratorio>65</laboratorio>
+            <paciente>665241</paciente>
+            <tipoExame>Sei Lá</tipoExame>
+            <resultado>Sei Lá Sei Lá Sei Lá</resultado>
+            <data>51</data>
+        </Exame>
+        <Exame>
+            <registro>665643</registro>
+            <laboratorio>65</laboratorio>
+            <paciente>666543</paciente>
+            <tipoExame>Sei Lá</tipoExame>
+            <resultado>Sei Lá Sei Lá Sei Lá</resultado>
+            <data>51</data>
+        </Exame>
+    <Exame><registro>1597696358.5212</registro><paciente>665241</paciente><tipoExame>x</tipoExame><resultado>dwadawdawdawdawdaw</resultado><data>2020-08-21</data></Exame><Exame><registro>1597696420.7699</registro><paciente>665241</paciente><tipoExame>x</tipoExame><resultado>dawdwadwadaw</resultado><data>2020-07-29</data></Exame><Exame><registro>1597696473</registro><paciente>665241</paciente><tipoExame>x</tipoExame><resultado>dwaawddsadawdawdaw</resultado><data>2020-07-30</data></Exame></Exames>

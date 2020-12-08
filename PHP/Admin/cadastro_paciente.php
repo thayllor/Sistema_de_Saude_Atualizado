@@ -74,6 +74,8 @@
             $xml_novo_lab->addChild('genero', $genero);
             $xml_novo_lab->addChild('idade', $idade);
             $xml->saveXML("../../XMLs/pacientes.xml");
+            redirect("index.php");
+
         }
     }
     ?>
@@ -82,7 +84,7 @@
 <nav class="navbar navbar-expand-sm bg-dark navbar-dark">
   <ul class="navbar-nav">
     <li class="navbar-text">
-    Sistema de Plano de Saúde
+        Nome do sistema
     </li>
   </ul>
 </nav>
@@ -94,16 +96,16 @@
     <center>
     <h1>Cadastro de Paciente</h1>
     
-    <form method="post" id="login_form" action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]); ?>">
+    <form method="post" id="c_paciente_form" action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]); ?>">
         <div class="form-row">
             <div class="col">
                 <label for="nome">Nome:</label>
-                <input type="text" class="form-control" id="nome" placeholder="Digite o nome aqui" name="nome" required> <br><br>
+                <input type="text" class="form-control" id="nome" placeholder="Digite o nome aqui" name="nome" required<?php echo $nome; ?>> <br><br>
                 <span class="error" id="nomeErr"><?php echo $nomeErr; ?></span><br>
             </div>
             <div class="col">
                 <label for="email">Email:</label>
-                <input type="text" class="form-control" id="email" placeholder="Digite o email aqui" name="email" required> <br><br>
+                <input type="text" class="form-control" id="email" placeholder="Digite o email aqui" name="email" required <?php echo $email; ?>> <br><br>
                 <span class="error" id="emailErr"><?php echo $emailErr; ?></span><br>
             </div>
         </div>
@@ -111,12 +113,12 @@
         <div class="form-row">
             <div class="col">
                 <label for="cpf">CPF:</label>
-                <input type="text" class="form-control" id="cpf" placeholder="Digite o Cpf aqui" name="cpf" required> <br><br>
+                <input type="text" class="form-control" id="cpf" placeholder="Digite o Cpf aqui" name="cpf" required<?php echo $cpf; ?>> <br><br>
                 <span class="error" id="cpfErr"><?php echo $cpfErr; ?></span><br>
             </div>
             <div class="col">
                 <label for="telefone">Telefone:</label>
-                <input type="text" class="form-control" id="telefone" placeholder="Digite o telefone aqui" name="telefone" required> <br><br>
+                <input type="text" class="form-control" id="telefone" placeholder="Digite o telefone aqui" name="telefone" required <?php echo $telefone; ?>> <br><br>
                 <span class="error" id="telefoneErr"><?php echo $telefoneErr; ?></span><br>
             </div>
         </div>
@@ -132,11 +134,11 @@
             </div>
             <div class="col">
                 <label for="Idade">Idade:</label>
-                <input type="number" class="form-control" id="idade" placeholder="Digite a idade aqui" name="idade" required> <br><br>
+                <input type="number" class="form-control" id="idade" placeholder="Digite a idade aqui" name="idade" required <?php echo $idade; ?>> <br><br>
             </div>
             <div class="col">
                 <label for="endereco">Endereço:</label>
-                <input type="text" class="form-control" id="endereco" placeholder="Digite o endereço aqui" name="endereco" required> <br><br>
+                <input type="text" class="form-control" id="endereco" placeholder="Digite o endereço aqui" name="endereco" required <?php echo $endereco; ?>> <br><br>
             </div>
             
         </div>

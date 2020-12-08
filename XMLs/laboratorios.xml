@@ -1,4 +1,23 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <Laboratorios>
-
-<Laboratorio><registro>1607436519</registro><email>laboratorio@laboratorio.com</email><senha>pass</senha><nome>Amaral Costa</nome><endereco>Av. Paulo José</endereco><telefone>1140028922</telefone><cnpj>37.223.552/0001-79</cnpj><tiposExames>Sangue e Urina</tiposExames></Laboratorio></Laboratorios>
+        <Laboratorio>
+            <registro>65</registro>
+            <email>x@x</email>
+            <senha>x</senha>
+            <nome>Não Sei</nome>
+            <endereco>oidsoi</endereco>
+            <telefone>xxxxxxx</telefone>
+            <cnpj>77</cnpj>
+            <tiposExames>x,y,e.9</tiposExames>
+        </Laboratorio>
+        <Laboratorio>
+            <registro>66</registro>
+            <email>y</email>
+            <senha>y</senha>
+            <nome>Não Sei2</nome>
+            <endereco>gesgesgesges</endereco>
+            <telefone>999999</telefone>
+            <cnpj>66</cnpj>
+            <tiposExames>x,l,e</tiposExames>
+        </Laboratorio>
+</Laboratorios>

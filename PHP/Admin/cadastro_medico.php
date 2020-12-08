@@ -67,15 +67,16 @@
             $xml = simplexml_load_file("../../XMLs/medicos.xml");
             $xml_novo_lab = $xml->addChild("Medico");
             $xml_novo_lab->addChild('registro', $registro);
+            $xml_novo_lab->addChild('nome', $nome);
             $xml_novo_lab->addChild('email', $email);
             $xml_novo_lab->addChild('senha', $senha);
-            $xml_novo_lab->addChild('nome', $nome);
             $xml_novo_lab->addChild('endereco', $endereco);
             $xml_novo_lab->addChild('telefone', $telefone);
             $xml_novo_lab->addChild('crm', $crm);
             $xml_novo_lab->addChild('especialidade', $especialidade);
             $xml_novo_lab->addChild('idade', $idade);
             $xml->saveXML("../../XMLs/medicos.xml");
+            redirect("index.php");
         }
     }
     ?>
@@ -85,7 +86,7 @@
 <nav class="navbar navbar-expand-sm bg-dark navbar-dark">
   <ul class="navbar-nav">
     <li class="navbar-text">
-    Sistema de Plano de Saúde
+        Nome do sistema 
     </li>
   </ul>
 </nav>
@@ -97,45 +98,45 @@
     <center>
     <h1>Cadastro de Medicos</h1>
     
-    <form method="post" id="login_form" action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]); ?>">
+    <form method="post" id="c_medico_form" action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]); ?>">
         <div class="form-row">
             <div class="col">
                 <label for="nome">Nome:</label>
-                <input type="text" class="form-control" id="nome" placeholder="Digite o nome aqui" name="nome" required> <br><br>
                 <span class="error" id="nomeErr"><?php echo $nomeErr; ?></span><br>
+                <input type="text" class="form-control" id="nome" placeholder="Digite o nome aqui" name="nome" required<?php echo $nome; ?>> <br><br>
             </div>
             <div class="col">
                 <label for="Idade">Idade:</label>
-                <input type="number" class="form-control" id="idade" placeholder="Digite a idade aqui" name="idade" required> <br><br>
+                <input type="number" class="form-control" id="idade" placeholder="Digite a idade aqui" name="idade" required <?php echo $idade; ?>> <br><br>
             </div>
         </div>
 
         <div class="form-row">
             <div class="col">
                 <label for="crm">CRM:</label>
-                <input type="text" class="form-control" id="crm" placeholder="Digite o CRM aqui" name="crm" required> <br><br>
                 <span class="error" id="crmErr"><?php echo $crmErr; ?></span><br>
+                <input type="text" class="form-control" id="crm" placeholder="Digite o CRM aqui" name="crm" required<?php echo $crm; ?>> <br><br>
             </div>
             <div class="col">
                 <label for="telefone">Telefone:</label>
-                <input type="text" class="form-control" id="telefone" placeholder="Digite o telefone aqui" name="telefone" required> <br><br>
                 <span class="error" id="telefoneErr"><?php echo $telefoneErr; ?></span><br>
+                <input type="text" class="form-control" id="telefone" placeholder="Digite o telefone aqui" name="telefone" required <?php echo $telefone; ?>> <br><br>
             </div>
         </div>
 
         <div class="form-row">
             <div class="col">
                 <label for="email">Email:</label>
-                <input type="text" class="form-control" id="email" placeholder="Digite o email aqui" name="email" required> <br><br>
                 <span class="error" id="emailErr"><?php echo $emailErr; ?></span><br>
+                <input type="text" class="form-control" id="email" placeholder="Digite o email aqui" name="email" required<?php echo $email; ?>> <br><br>
             </div>
             <div class="col">
                 <label for="especialidade">Especialidade:</label>
-                <input type="text" class="form-control" id="especialidade" placeholder="Digite a especialidade do medico aqui" name="especialidade" required> <br><br>
+                <input type="text" class="form-control" id="especialidade" placeholder="Digite a especialidade do medico aqui" name="especialidade" required <?php echo $especialidade; ?>> <br><br>
             </div>
             <div class="col">
                 <label for="endereco">Endereço:</label>
-                <input type="text" class="form-control" id="endereco" placeholder="Digite o endereço aqui" name="endereco" required> <br><br>
+                <input type="text" class="form-control" id="endereco" placeholder="Digite o endereço aqui" name="endereco" required <?php echo $endereco; ?>> <br><br>
             </div>
             
         </div>
@@ -147,8 +148,8 @@
             </div>
             <div class="col">
                 <label for="csenha">Confirmar senha:</label>
-                <input type="password" class="form-control" id="csenha" placeholder="Repita a senha aqui" name="csenha" required> <br><br>
                 <span class="error" id="senhaErr"><?php echo $senhaErr; ?></span><br>
+                <input type="password" class="form-control" id="csenha" placeholder="Repita a senha aqui" name="csenha" required> <br><br>
             </div>
         </div>
         <button class="btn btn-primary btn-lg btn-block" type="submit" name="submit" value="Cadastrar">Cadastrar</button>

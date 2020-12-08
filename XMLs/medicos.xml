@@ -1,4 +1,25 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <Medicos>
-
-</Medicos>
+        <Medico>
+            <registro>1</registro>
+            <nome>Joãozinh2</nome>
+            <email>Joãozinha@putx</email>
+            <senha>152</senha>
+            <endereco>djaiopms</endereco>
+            <telefone>1569486699</telefone>
+            <crm>1285214346</crm>
+            <especialidade>nenhuma</especialidade>
+            <idade>36</idade>
+        </Medico>
+        <Medico>
+            <registro>2</registro>
+            <nome>Joãozinha</nome>
+            <email>Joãozinha@putz</email>
+            <senha>158</senha>
+            <endereco>djaiopms</endereco>
+            <telefone>1569486699</telefone>
+            <crm>1285162146</crm>
+            <especialidade>nenhuma</especialidade>
+            <idade>54</idade>
+        </Medico>
+    <Medico><registro>1607439364</registro><email>x@x</email><senha>x</senha><nome>x</nome><endereco>asdg</endereco><telefone>5559378155</telefone><crm>256</crm><especialidade>sgs</especialidade><idade>26</idade></Medico></Medicos>
