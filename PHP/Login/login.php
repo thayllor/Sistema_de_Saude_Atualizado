@@ -38,6 +38,18 @@
             $_SESSION["senha"] = $senha;
             $_SESSION["type"] = $type;
             $_SESSION["registro"] = (float)$user->registro;
+            if($_SESSION["type"]=="admin") {
+                redirect("./../Admin/index.php");
+            }
+            if($_SESSION["type"]=="laboratorio") {
+                redirect("./../Laboratorio/index.php");
+            }
+            if($_SESSION["type"]=="medico") {
+                redirect("./../Medico/index.php");
+            }
+            if($_SESSION["type"]=="paciente") {
+                redirect("./../Paciente/index.php");
+            }
         } else {
             session_unset();
         };
