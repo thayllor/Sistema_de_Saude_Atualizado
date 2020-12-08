@@ -99,7 +99,7 @@
 <nav class="navbar navbar-expand-sm bg-dark navbar-dark">
   <ul class="navbar-nav">
     <li class="navbar-text">
-        Nome do sistema
+        Sistema de Plano de Saúde
     </li>
   </ul>
 </nav>

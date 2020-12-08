@@ -26,7 +26,7 @@
     if (count($_SESSION) == 0) {
       redirect("./../Login/login.php");
     }
-    if($_SESSION["type"] != "admin"){
+    if($_SESSION["type"] != "paciente"){
       redirect("./../Login/login.php");
     }
     ?>
@@ -34,7 +34,7 @@
 <nav class="navbar navbar-expand-sm bg-dark navbar-dark">
   <ul class="navbar-nav">
     <li class="navbar-text">
-      Sistema de Plano de Saúde
+        Sistema de Plano de Saúde
     </li>
   </ul>
 </nav>
@@ -44,26 +44,25 @@
 <div class="container">
   <center>
     
-<h2>Menu de Administrador</h2>
+<h2>Menu de Paciente</h2>
   </center>
   <div class="row">
     
     <div class="col-sm-4">
-      <center>
-      <h3>Cadastrar Laboratorio</h3>
-        <a href="./cadastro_laboratorio.php" class="btn btn-info" role="button">Entrar com Dados</a>
-      </center>
-    </div>
-    <div class="col-sm-4">
       <center> 
-        <h3>Cadastrar Medico</h3>
-        <a href="./cadastro_medico.php" class="btn btn-info" role="button">Entrar com Dados</a>
+        <h3>Editar seus dados</h3>
+        <a href="./editar.php" class="btn btn-info" role="button">Entrar com Dados</a>
       </center>
     </div>
     <div class="col-sm-4">
       <center>
-        <h3>Cadastrar Paciente</h3>        
-        <a href="./cadastro_paciente.php" class="btn btn-info" role="button">Entrar com Dados</a>
+        <h3>Visualizar histórico de consultas</h3>        
+        <a href="./historicoConsultas.php" class="btn btn-info" role="button">Entrar com Dados</a>
+      </center>
+      <div class="col-sm-4">
+      <center>
+        <h3>Visualizar histórico de exames</h3>        
+        <a href="./historicoExames.php" class="btn btn-info" role="button">Entrar com Dados</a>
       </center>
     </div>
   </div>
