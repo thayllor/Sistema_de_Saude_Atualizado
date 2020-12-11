@@ -24,7 +24,6 @@
     <?php
     include "../functions.php";
     session_start();
-    print_r($_SESSION);
     if (count($_SESSION) == 0) {
         redirect("./../Login/login.php");
     }
@@ -116,6 +115,9 @@
     <li class="navbar-text">
         Nome do sistema
     </li>
+    <li>
+            <a href="index.php" class="btn btn-info" role="button">Voltar pro menu</a>
+    </li>
   </ul>
 </nav>
 <div class="jumbotron"style="background-image: url(http://localhost/CSS/fundo.jpg); background-size: 100%; background-position:center;height:250px">
@@ -134,8 +136,9 @@
         <div class="form-row">
             <div class="col">
                 <label for="nome">Nome:</label>
-                <input type="text" class="form-control" id="nome" placeholder="Digite o nome aqui" name="nome" required value="<?php echo $nome; ?>"><br>
                 <span class="error"><?php echo $nomeErr; ?></span><br>
+                <input type="text" class="form-control" id="nome" placeholder="Digite o nome aqui" name="nome" required value="<?php echo $nome; ?>"><br>
+                
             </div>
             <div class="col">
                 <label for="tiposExamese">Tipos de exame:</label>
@@ -146,21 +149,22 @@
         <div class="form-row">
             <div class="col">
                 <label for="cnpj">CNPJ:</label>
-                <input type="text" class="form-control" id="cnpj" placeholder="Digite o CNPJ aqui" name="cnpj" required value="<?php echo $cnpj; ?>"><br>
                 <span class="error" id="cnpjErr"><?php echo $cnpjErr; ?></span><br>
+
+                <input type="text" class="form-control" id="cnpj" placeholder="Digite o CNPJ aqui" name="cnpj" required value="<?php echo $cnpj; ?>"><br>
             </div>
             <div class="col">
                 <label for="telefone">Telefone:</label>
-                <input type="text" class="form-control" id="telefone" placeholder="Digite o telefone aqui" name="telefone" required value="<?php echo $telefone; ?>"><br>
                 <span class="error" id="telefoneErr"><?php echo $telefoneErr; ?></span><br>
+                <input type="text" class="form-control" id="telefone" placeholder="Digite o telefone aqui" name="telefone" required value="<?php echo $telefone; ?>"><br>
             </div>
         </div>
 
         <div class="form-row">
             <div class="col">
                 <label for="email">Email:</label>
-                <input type="text" class="form-control" id="email" placeholder="Digite o email aqui" name="email" required value="<?php echo $email; ?>"><br>
                 <span class="error" id="emailErr"><?php echo $emailErr; ?></span><br>
+                <input type="text" class="form-control" id="email" placeholder="Digite o email aqui" name="email" required value="<?php echo $email; ?>"><br>
             </div>
             
             <div class="col">

@@ -22,7 +22,6 @@
     include "../functions.php";
      $err = "";
      session_start();
-    print_r($_SESSION);
     if (count($_SESSION) == 0) {
       redirect("./../Login/login.php");
     }
@@ -32,9 +31,12 @@
     ?>
     
 <nav class="navbar navbar-expand-sm bg-dark navbar-dark">
-  <ul class="navbar-nav">
+  <ul class="navbar-nav" style="width:100%; align-itens:end;" >
     <li class="navbar-text">
         Nome do sistema
+    </li>
+    <li>
+    <a href="../../" class="btn btn-info float-right" role="button" >Log Out</a>
     </li>
   </ul>
 </nav>

@@ -25,16 +25,15 @@
     include "../functions.php";
 
     session_start();
-    print_r($_SESSION);
     if (count($_SESSION) == 0) {
         redirect("./../Login/login.php");
     }
     if($_SESSION["type"] != "laboratorio"){
         redirect("./../Login/login.php");
     }
+    
 
     $laboratorio = checkUser($_SESSION["email"], $_SESSION["senha"], $_SESSION["type"]);
-    echo "<br>";
 
     /*
         <Exame>
@@ -55,8 +54,7 @@
         $data = (empty($_POST["data"]) ? "" : test_input($_POST["data"]));
         $resultado = (empty($_POST["resultado"]) ? "" : test_input($_POST["resultado"]));
         $tipoExame = (empty($_POST["tipoExame"]) ? "" : test_input($_POST["tipoExame"]));
-
-        $buscados = busca("consulta", array(array("tipoExame", $tipoExame), array("resultado", $resultado), array("data", $data), array("paciente", $paciente)), true);
+        $buscados = busca("exame", array(array("tipoExame", $tipoExame), array("resultado", $resultado), array("data", $data), array("paciente", $paciente)), true);
 
         if (empty($buscados)){
             echo "<br>Exame já existe!<br>";
@@ -65,12 +63,14 @@
             $xml = simplexml_load_file("../../XMLs/exames.xml");
             $xml_exame = $xml->addChild("Exame");
             $xml_exame->addChild('registro', (int)microtime(true));
+            $xml_exame->addChild('laboratorio', $laboratorio->registro );
             $xml_exame->addChild('paciente', $paciente);
             $xml_exame->addChild('tipoExame', $tipoExame);
             $xml_exame->addChild('resultado', $resultado);
             $xml_exame->addChild('data', $data);
             $xml->saveXML("../../XMLs/exames.xml");
             echo "<br>Exame Cadastrado<br>";
+            redirect("index.php");
 
         }
     } else {
@@ -100,6 +100,9 @@
   <ul class="navbar-nav">
     <li class="navbar-text">
         Nome do sistema
+    </li>
+    <li>
+            <a href="index.php" class="btn btn-info" role="button">Voltar pro menu</a>
     </li>
   </ul>
 </nav>

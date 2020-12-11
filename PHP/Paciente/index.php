@@ -36,6 +36,9 @@
     <li class="navbar-text">
         Sistema de Plano de Saúde
     </li>
+    <li>
+    <a href="../../" class="btn btn-info" role="button">Log Out</a>
+    </li>
   </ul>
 </nav>
 <div class="jumbotron"style="background-image: url(http://localhost/CSS/fundo.jpg); background-size: 100%; background-position:center;height:250px">

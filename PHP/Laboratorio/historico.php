@@ -28,7 +28,6 @@
     include "../functions.php";
 
     session_start();
-    print_r($_SESSION);
     if (count($_SESSION) == 0) {
         redirect("./../Login/login.php");
     }
@@ -36,7 +35,6 @@
         redirect("./../Login/login.php");
     }
     $laboratorio = checkUser($_SESSION["email"], $_SESSION["senha"], $_SESSION["type"]);
-    echo "<br>";
 
     /*
         <Exame>
@@ -47,12 +45,23 @@
             <resultado>xxxxxxx</resultado>
             <data>0</data>
         </Exame>
+        <Paciente>
+            <registro>665241</registro>
+            <email>x@xy</email>
+            <senha>x</senha>
+            <nome>xxxxxxxxx</nome> 
+            <endereco>ddddddd</endereco>
+            <telefone>53999999999</telefone>
+            <cpf>028-901-590-19</cpf>
+            <genero>M</genero>
+            <idade>31</idade>
+        </Paciente>
     */
     $err = "";
 
     $method = $_SERVER["REQUEST_METHOD"];
 
-    $pacientes = simplexml_load_file("../../XMLs/pacientes.xml");
+    $pacientes= simplexml_load_file("../../XMLs/pacientes.xml");
     $exames = simplexml_load_file("../../XMLs/exames.xml");
 
     $lista = "";
@@ -65,6 +74,7 @@
                     " . $paciente->nome . "
                     </button><br><br><div id='" . $paciente->registro . "-historico' style='display: none;'>";
                     $found = true;
+                    ;
                 }
                 $lista .= "Tipo do Exame: " . $exame->tipoExame . "<br>";
                 $lista .= "Resultado: " . $exame->resultado . "<br>";
@@ -84,6 +94,9 @@
   <ul class="navbar-nav">
     <li class="navbar-text">
         Nome do sistema
+    </li>
+    <li>
+            <a href="index.php" class="btn btn-info" role="button">Voltar pro menu</a>
     </li>
   </ul>
 </nav>

@@ -22,4 +22,15 @@
             <especialidade>nenhuma</especialidade>
             <idade>54</idade>
         </Medico>
-    <Medico><registro>1607439364</registro><email>x@x</email><senha>x</senha><nome>x</nome><endereco>asdg</endereco><telefone>5559378155</telefone><crm>256</crm><especialidade>sgs</especialidade><idade>26</idade></Medico></Medicos>
+        <Medico>
+            <registro>3</registro>
+            <nome>xzinho</nome>
+            <email>x@x</email>
+            <senha>x</senha>
+            <endereco>uma casa</endereco>
+            <telefone>1569486699</telefone>
+            <crm>1285214346</crm>
+            <especialidade>nenhuma</especialidade>
+            <idade>36</idade>
+        </Medico>
+    </Medicos>

@@ -95,6 +95,9 @@
     <li class="navbar-text">
         Nome do sistema
     </li>
+    <li>
+            <a href="index.php" class="btn btn-info" role="button">Voltar pro menu</a>
+    </li>
   </ul>
 </nav>
 <div class="jumbotron"style="background-image: url(http://localhost/CSS/fundo.jpg); background-size: 100%; background-position:center;height:250px">

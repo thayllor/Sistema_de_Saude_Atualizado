@@ -28,7 +28,6 @@
     <?php
     include "../functions.php";
     session_start();
-    print_r($_SESSION);
     if (count($_SESSION) == 0) {
         redirect("./../Login/login.php");
     }
@@ -87,6 +86,9 @@
   <ul class="navbar-nav">
     <li class="navbar-text">
         Nome do sistema 
+    </li>
+    <li>
+            <a href="index.php" class="btn btn-info" role="button">Voltar pro menu</a>
     </li>
   </ul>
 </nav>

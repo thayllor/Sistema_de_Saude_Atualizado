@@ -22,7 +22,6 @@
     include "../functions.php";
      $err = "";
      session_start();
-    print_r($_SESSION);
     if (count($_SESSION) == 0) {
       redirect("./../Login/login.php");
     }
@@ -36,6 +35,10 @@
     <li class="navbar-text">
         Sistema de Plano de Saúde
     </li>
+    <li>
+    <a href="../../" class="btn btn-info" role="button" >Log Out</a>
+    </li>
+    
   </ul>
 </nav>
 <div class="jumbotron"style="background-image: url(http://localhost/CSS/fundo.jpg); background-size: 100%; background-position:center;height:250px">
