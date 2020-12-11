@@ -25,7 +25,6 @@
     <?php
     include "../functions.php";
     session_start();
-    print_r($_SESSION);
     if (count($_SESSION) == 0) {
         redirect("./../Login/login.php");
     }
@@ -34,61 +33,45 @@
     }
 
     // define variables and set to empty values
-    $emailErr = $nomeErr = $pacreg = "";
+    $emailErr = $nomeErr = $optionsPacientes= "";
     $nome = $receita = $observacao = $data = "";
     $method = $_SERVER["REQUEST_METHOD"];
     if ($method == "POST") {
 
         $nome = (empty($_POST["nome"]) ? "" : test_input($_POST["nome"]));
-
+        $paciente = (empty($_POST["paciente"]) ? "" : test_input($_POST["paciente"]));
         $buscados = busca("paciente", array(array("nome", $nome)), false);
+        $observacao = (empty($_POST["observacao"]) ? "" : test_input($_POST["observacao"]));
+        $data = (empty($_POST["data"]) ? "" : test_input($_POST["data"])); 
+        $receita = (empty($_POST["receita"]) ? "" : test_input($_POST["receita"]));
+        $medico = $_SESSION["registro"];
 
-        foreach ($buscados as $buscado) {
-            if ($buscado->nome == $nome) {
-                $pacreg = $buscado->registro;
-            }
-        }
+        $buscados = busca("consulta", array(array("medico", $medico), array("observacao", $observacao), array("receita", $receita), array("data", $data), array("paciente", $paciente)), true);
 
-        if ($pacreg == "") {
 
-            echo "<br>Paciente não encontrado!<br>";
-
+        if (empty($buscados)){
+            echo "<br>Consulta já existe!<br>";
         } else {
 
-            $observacao = (empty($_POST["observacao"]) ? "" : test_input($_POST["observacao"]));
-            $data = (empty($_POST["data"]) ? "" : test_input($_POST["data"])); 
-            $receita = (empty($_POST["receita"]) ? "" : test_input($_POST["receita"]));
-            $medico = $_SESSION["registro"];
+            $registro = (int)microtime(true);
+            $xml = simplexml_load_file("../../XMLs/consultas.xml");
+            $xml_nova_consulta = $xml->addChild("Consulta");
+            $xml_nova_consulta->addChild('registro', $registro);
+            $xml_nova_consulta->addChild('data', $data);
+            $xml_nova_consulta->addChild('medico', $medico);
+            $xml_nova_consulta->addChild('paciente', $paciente);
+            $xml_nova_consulta->addChild('receita', $receita);
+            $xml_nova_consulta->addChild('observacao', $observacao);
+            $xml->saveXML("../../XMLs/consultas.xml");
+            redirect("index.php");
 
-            $buscados = busca("consulta", array(array("medico", $medico), array("observacao", $observacao), array("receita", $receita), array("data", $data), array("paciente", $pacreg)), true);
-
-            if (empty($buscados)){
-                echo "<br>Consulta já existe!<br>";
-            } else {
-
-
-                $registro = (int)microtime(true);
-
-                $xml = simplexml_load_file("../../XMLs/consultas.xml");
-                $xml_nova_consulta = $xml->addChild("Consulta");
-                $xml_nova_consulta->addChild('registro', $registro);
-                $xml_nova_consulta->addChild('data', $data);
-                $xml_nova_consulta->addChild('medico', $medico);
-                $xml_nova_consulta->addChild('paciente', $pacreg);
-                $xml_nova_consulta->addChild('receita', $receita);
-                $xml_nova_consulta->addChild('observacao', $observacao);
-                $xml->saveXML("../../XMLs/consultas.xml");
-
-                echo "<br>Cadastro da consulta realizado<br>";
-
-            }
         }
-
     } else {
-        $medico = checkUser($_SESSION["email"], $_SESSION["senha"], $_SESSION["type"]);
+        $pacientes = simplexml_load_file("../../XMLs/pacientes.xml");
 
-        if ($medico == false) {
-            //redireciona pro login
+        foreach ($pacientes as $paciente) {
+
+            $optionsPacientes .= "<option name='optionsPacientes' value='" . $paciente->registro . "'>" . $paciente->nome . "</option>";
         }
     }
     function test_input($data)
@@ -100,17 +83,19 @@
     }
     ?>
 
-    
-<nav class="navbar navbar-expand-sm bg-dark navbar-dark">
-  <ul class="navbar-nav">
-    <li class="navbar-text">
-        Nome do sistema
-    </li>
-    <li>
-            <a href="index.php" class="btn btn-info" role="button">Voltar pro menu</a>
-    </li>
-  </ul>
+<nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+  <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarTogglerDemo01" aria-controls="navbarTogglerDemo01" aria-expanded="false" aria-label="Toggle navigation">
+    <span class="navbar-toggler-icon"></span>
+  </button>
+  <div class="collapse navbar-collapse" id="navbarTogglerDemo01">
+    <a class="navbar-brand" href="#">Sistema de Plano de Saúde</a>
+    <ul class="navbar-nav mr-auto mt-2 mt-lg-0">
+      <li class="nav-item active"></li>
+    </ul>
+      <a href="index.php" class="btn btn-info float-right" role="button" >Voltar para o menu</a>
+  </div>
 </nav>
+
 <div class="jumbotron"style="background-image: url(http://localhost/CSS/fundo.jpg); background-size: 100%; background-position:center;height:250px">
 </div>
 <div>
@@ -121,10 +106,11 @@
     <form method="post" id="editar_form" action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]); ?>">
     <div class="container" align="center" >
         <div class="col" align="center">
-             
-            <label for="nome">Nome do paciente:</label>
-            <input type="text" class="form-control" name="nome" id="nome" required value="<?php echo $nome; ?>"><br><br><br>
-
+            <label for="paciente">Paciente:</label>
+            <select name="paciente" class="form-control" id="paciente" required>
+                <?php echo $optionsPacientes; ?>
+            </select>
+           
             
             <div class="form-row">
                 <div class="col">

@@ -30,17 +30,19 @@
     }
     ?>
     
-<nav class="navbar navbar-expand-sm bg-dark navbar-dark">
-  <ul class="navbar-nav">
-    <li class="navbar-text">
-        Sistema de Plano de Saúde
-    </li>
-    <li>
-    <a href="../../" class="btn btn-info" role="button" >Log Out</a>
-    </li>
-    
-  </ul>
+    <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+  <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarTogglerDemo01" aria-controls="navbarTogglerDemo01" aria-expanded="false" aria-label="Toggle navigation">
+    <span class="navbar-toggler-icon"></span>
+  </button>
+  <div class="collapse navbar-collapse" id="navbarTogglerDemo01">
+    <a class="navbar-brand" href="#">Sistema de Plano de Saúde</a>
+    <ul class="navbar-nav mr-auto mt-2 mt-lg-0">
+      <li class="nav-item active"></li>
+    </ul>
+      <a href="../../" class="btn btn-info float-right" role="button" >Log Out</a>
+  </div>
 </nav>
+
 <div class="jumbotron"style="background-image: url(http://localhost/CSS/fundo.jpg); background-size: 100%; background-position:center;height:250px">
 </div>
   
@@ -65,7 +67,7 @@
     </div>
     <div class="col-sm-4">
       <center>
-        <h3>Visualizar histórico de exames</h3>        
+        <h3>Histórico de exames</h3>        
         <a href="./historico.php" class="btn btn-info" role="button">Entrar com Dados</a>
       </center>
     </div>

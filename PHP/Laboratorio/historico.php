@@ -36,27 +36,6 @@
     }
     $laboratorio = checkUser($_SESSION["email"], $_SESSION["senha"], $_SESSION["type"]);
 
-    /*
-        <Exame>
-            <registro>665641</registro>
-            <laboratorio>x</laboratorio>
-            <paciente>234432432</paciente>
-            <tipoExame>Não Sei</tipoExame>
-            <resultado>xxxxxxx</resultado>
-            <data>0</data>
-        </Exame>
-        <Paciente>
-            <registro>665241</registro>
-            <email>x@xy</email>
-            <senha>x</senha>
-            <nome>xxxxxxxxx</nome> 
-            <endereco>ddddddd</endereco>
-            <telefone>53999999999</telefone>
-            <cpf>028-901-590-19</cpf>
-            <genero>M</genero>
-            <idade>31</idade>
-        </Paciente>
-    */
     $err = "";
 
     $method = $_SERVER["REQUEST_METHOD"];
@@ -90,16 +69,19 @@
     }
     ?>
 
-<nav class="navbar navbar-expand-sm bg-dark navbar-dark">
-  <ul class="navbar-nav">
-    <li class="navbar-text">
-        Nome do sistema
-    </li>
-    <li>
-            <a href="index.php" class="btn btn-info" role="button">Voltar pro menu</a>
-    </li>
-  </ul>
+<nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+  <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarTogglerDemo01" aria-controls="navbarTogglerDemo01" aria-expanded="false" aria-label="Toggle navigation">
+    <span class="navbar-toggler-icon"></span>
+  </button>
+  <div class="collapse navbar-collapse" id="navbarTogglerDemo01">
+    <a class="navbar-brand" href="#">Sistema de Plano de Saúde</a>
+    <ul class="navbar-nav mr-auto mt-2 mt-lg-0">
+      <li class="nav-item active"></li>
+    </ul>
+    <a href="index.php" class="btn btn-info float-right" role="button" >Voltar para o menu</a>
+  </div>
 </nav>
+
 <div class="jumbotron"style="background-image: url(http://localhost/CSS/fundo.jpg); background-size: 100%; background-position:center;height:250px">
 </div>
 <div class="container">

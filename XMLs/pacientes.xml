@@ -22,4 +22,15 @@
             <genero>M</genero>
             <idade>57</idade>
         </Paciente>
+        <Paciente>
+            <registro>1607439850</registro>
+            <email>x@u</email>
+            <senha>x</senha>
+            <nome>nominho2</nome>
+            <endereco>ldjmbmz d</endereco>
+            <telefone>5999841657</telefone>
+            <cpf>05003739060</cpf>
+            <genero>M</genero>
+            <idade>57</idade>
+        </Paciente>
     </Pacientes>

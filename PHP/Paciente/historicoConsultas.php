@@ -24,7 +24,6 @@
     include "../functions.php";
 
     session_start();
-    print_r($_SESSION);
     if (count($_SESSION) == 0) {
         redirect("./../Login/login.php");
     }
@@ -33,7 +32,6 @@
     }
 
     $paciente = checkUser($_SESSION["email"], $_SESSION["senha"], $_SESSION["type"]);
-    echo "<br>";
 
     $lista = "";
 
@@ -64,15 +62,17 @@
 
     ?>
 
-    <nav class="navbar navbar-expand-sm bg-dark navbar-dark">
-  <ul class="navbar-nav">
-    <li class="navbar-text">
-        Nome do sistema
-    </li>
-    <li>
-            <a href="index.php" class="btn btn-info" role="button">Voltar pro menu</a>
-    </li>
-  </ul>
+<nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+  <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarTogglerDemo01" aria-controls="navbarTogglerDemo01" aria-expanded="false" aria-label="Toggle navigation">
+    <span class="navbar-toggler-icon"></span>
+  </button>
+  <div class="collapse navbar-collapse" id="navbarTogglerDemo01">
+    <a class="navbar-brand" href="#">Sistema de Plano de Saúde</a>
+    <ul class="navbar-nav mr-auto mt-2 mt-lg-0">
+      <li class="nav-item active"></li>
+    </ul>
+    <a href="index.php" class="btn btn-info float-right" role="button" >Voltar para o menu</a>
+  </div>
 </nav>
 <div class="jumbotron"style="background-image: url(http://localhost/CSS/fundo.jpg); background-size: 100%; background-position:center;height:250px">
 </div>

@@ -22,7 +22,6 @@
     <?php
     include "../functions.php";
     session_start();
-    print_r($_SESSION);
     if (count($_SESSION) == 0) {
         redirect("./../Login/login.php");
     }
@@ -96,6 +95,7 @@
         $telefone = $medico->telefone;
         $crm = $medico->crm;
         $especialidade = $medico->especialidade;
+        $idade= $medico->idade;
     }
 
     function test_input($data)
@@ -108,16 +108,19 @@
     ?>
 
 
-<nav class="navbar navbar-expand-sm bg-dark navbar-dark">
-  <ul class="navbar-nav">
-    <li class="navbar-text">
-        Nome do sistema
-    </li>
-    <li>
-            <a href="index.php" class="btn btn-info" role="button">Voltar pro menu</a>
-    </li>
-  </ul>
+<nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+  <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarTogglerDemo01" aria-controls="navbarTogglerDemo01" aria-expanded="false" aria-label="Toggle navigation">
+    <span class="navbar-toggler-icon"></span>
+  </button>
+  <div class="collapse navbar-collapse" id="navbarTogglerDemo01">
+    <a class="navbar-brand" href="#">Sistema de Plano de Saúde</a>
+    <ul class="navbar-nav mr-auto mt-2 mt-lg-0">
+      <li class="nav-item active"></li>
+    </ul>
+    <a href="index.php" class="btn btn-info float-right" role="button" >Voltar para o menu</a>
+  </div>
 </nav>
+
 <div class="jumbotron"style="background-image: url(http://localhost/CSS/fundo.jpg); background-size: 100%; background-position:center;height:250px">
 </div>
 <div>
@@ -130,23 +133,23 @@
     <div class="form-row">
         <div class="col">
             <label for="nome">Nome:</label>
-            <input type="text" class="form-control" id="nome" placeholder="Digite o nome aqui" name="nome" required> <br><br>
+            <input type="text" class="form-control" id="nome" placeholder="Digite o nome aqui" name="nome" required value="<?php echo $nome; ?>"> <br><br>
         </div>
         <div class="col">
             <label for="Idade">Idade:</label>
-            <input type="number" class="form-control" id="idade" placeholder="Digite a idade aqui" name="idade" required> <br><br>
+            <input type="number" class="form-control" id="idade" placeholder="Digite a idade aqui" name="idade" required value="<?php echo $idade; ?>"> <br><br>
         </div>
     </div>
 
     <div class="form-row">
         <div class="col">
             <label for="crm">CRM:</label>
-            <input type="text" class="form-control" id="crm" placeholder="Digite o CRM aqui" name="crm" required> <br><br>
+            <input type="text" class="form-control" id="crm" placeholder="Digite o CRM aqui" name="crm" required value="<?php echo $crm; ?>"> <br><br>
             <span class="error" id="crmErr"><?php echo $crmErr; ?></span><br><br>
         </div>
         <div class="col">
             <label for="telefone">Telefone:</label>
-            <input type="text" class="form-control" id="telefone" placeholder="Digite o telefone aqui" name="telefone" required> <br><br>
+            <input type="text" class="form-control" id="telefone" placeholder="Digite o telefone aqui" name="telefone" required value="<?php echo $telefone; ?>"> <br><br>
             <span class="error" id="telefoneErr"><?php echo $telefoneErr; ?></span>
         </div>
     </div>
@@ -154,15 +157,15 @@
     <div class="form-row">
         <div class="col">
             <label for="email">Email:</label>
-            <input type="text" class="form-control" id="email" placeholder="Digite o email aqui" name="email" required> <br><br>
+            <input type="text" class="form-control" id="email" placeholder="Digite o email aqui" name="email" required value="<?php echo $email; ?>"> <br><br>
         </div>
         <div class="col">
             <label for="especialidade">Especialidade:</label>
-            <input type="text" class="form-control" id="especialidade" placeholder="Digite a especialidade do medico aqui" name="especialidade" required> <br><br>
+            <input type="text" class="form-control" id="especialidade" placeholder="Digite a especialidade do medico aqui" name="especialidade" required value="<?php echo $especialidade; ?>"> <br><br>
         </div>
         <div class="col">
             <label for="endereco">Endereço:</label>
-            <input type="text" class="form-control" id="endereco" placeholder="Digite o endereço aqui" name="endereco" required> <br><br>
+            <input type="text" class="form-control" id="endereco" placeholder="Digite o endereço aqui" name="endereco" required value="<?php echo $endereco; ?>"> <br><br>
         </div>
     </div>
 
