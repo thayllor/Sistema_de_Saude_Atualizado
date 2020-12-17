@@ -38,11 +38,11 @@
     $registro = $paciente = $tipoExame = $resultado = $data = $optionsPacientes = $optionsTipoExame = "";
     $method = $_SERVER["REQUEST_METHOD"];
     if ($method == "POST") {
-        //echo "e2";
-        $paciente = (empty($_POST["paciente"]) ? "" : test_input($_POST["paciente"]));
-        $data = (empty($_POST["data"]) ? "" : test_input($_POST["data"]));
-        $resultado = (empty($_POST["resultado"]) ? "" : test_input($_POST["resultado"]));
-        $tipoExame = (empty($_POST["tipoExame"]) ? "" : test_input($_POST["tipoExame"]));
+        
+        $paciente = ($_POST["paciente"]);
+        $data = ($_POST["data"]);
+        $resultado = ($_POST["resultado"]);
+        $tipoExame = ($_POST["tipoExame"]);
         $buscados = busca("exame", array(array("tipoExame", $tipoExame), array("resultado", $resultado), array("data", $data), array("paciente", $paciente)), true);
         print_r($buscados);
         if (empty($buscados)){
@@ -75,13 +75,7 @@
             $optionsTipoExame .= "<option name='optionsExames' value='" . $tipoExame . "'>" . $tipoExame . "</option>";
         }
     }
-    function test_input($data)
-    {
-        $data = trim($data);
-        $data = stripslashes($data);
-        $data = htmlspecialchars($data);
-        return $data;
-    }
+
     ?>
 
 <nav class="navbar navbar-expand-lg navbar-dark bg-dark">

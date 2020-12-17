@@ -1,36 +1,14 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <Pacientes>
-        <Paciente>
-            <registro>665241</registro>
-            <email>x@xy</email>
-            <senha>x</senha>
-            <nome>xxxxxxxxx</nome> 
-            <endereco>ddddddd</endereco>
-            <telefone>53999999999</telefone>
-            <cpf>028-901-590-19</cpf>
-            <genero>M</genero>
-            <idade>31</idade>
-        </Paciente>
-        <Paciente>
-            <registro>1607439855</registro>
-            <email>x@x</email>
-            <senha>x</senha>
-            <nome>nominho</nome>
-            <endereco>ldjmbmz d</endereco>
-            <telefone>5999841657</telefone>
-            <cpf>05003739060</cpf>
-            <genero>M</genero>
-            <idade>57</idade>
-        </Paciente>
-        <Paciente>
-            <registro>1607439850</registro>
-            <email>x@u</email>
-            <senha>x</senha>
-            <nome>nominho2</nome>
-            <endereco>ldjmbmz d</endereco>
-            <telefone>5999841657</telefone>
-            <cpf>05003739060</cpf>
-            <genero>M</genero>
-            <idade>57</idade>
-        </Paciente>
-    </Pacientes>
+    <Paciente>
+        <registro>1608086583</registro>
+        <email>thiago@mail.com</email>
+        <senha>paciente</senha>
+        <nome>Thiago Sampaio</nome>
+        <endereco>Rua Argentina, 345, Cassino, Rio Grande - RS</endereco>
+        <telefone>1140028922</telefone>
+        <cpf>05003739060</cpf>
+        <genero>M</genero>
+        <idade>21</idade>        
+    </Paciente>
+</Pacientes>

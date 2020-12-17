@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <Consultas>
-        <Consulta>
-            <registro>665641</registro>
-            <medico>665491</medico>
-            <paciente>665241</paciente>
-            <receita>Tylenol</receita>
-            <observacao>Ok</observacao>
-            <data>2020-08-20</data>
-        </Consulta>
-<Consulta><registro>1607655541</registro><data>2020-12-02</data><medico>3</medico><paciente>665241</paciente><receita>asdg</receita><observacao>sdg</observacao></Consulta><Consulta><registro>1607655644</registro><data>2020-12-23</data><medico>3</medico><paciente>1607439850</paciente><receita>SDGA</receita><observacao>wegAWSEG</observacao></Consulta><Consulta><registro>1607656777</registro><data>2020-12-23</data><medico>3</medico><paciente>665241</paciente><receita>dgs</receita><observacao>sdh</observacao></Consulta><Consulta><registro>1607656824</registro><data>2020-12-16</data><medico>3</medico><paciente>1607439855</paciente><receita>sgdasdg</receita><observacao>dzfha</observacao></Consulta></Consultas>
+    <Consulta>
+        <registro>1608087652</registro>
+        <data>2020-12-16</data>
+        <medico>1608086971</medico>
+        <paciente>1608086583</paciente>
+        <receita>Xarope</receita>
+        <observacao>Câncer de prostata</observacao>
+    </Consulta>
+</Consultas>

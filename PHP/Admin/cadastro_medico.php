@@ -92,6 +92,8 @@
       <a href="index.php" class="btn btn-info float-right" role="button" >Voltar para o menu</a>
   </div>
 </nav>
+<div class="jumbotron"style="background-image: url(http://localhost/CSS/fundo.jpg); background-size: 100%; background-position:center;height:250px">
+</div>
 
 <div class="container">
     <center>

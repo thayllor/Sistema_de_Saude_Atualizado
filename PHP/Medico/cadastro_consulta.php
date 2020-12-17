@@ -38,12 +38,12 @@
     $method = $_SERVER["REQUEST_METHOD"];
     if ($method == "POST") {
 
-        $nome = (empty($_POST["nome"]) ? "" : test_input($_POST["nome"]));
-        $paciente = (empty($_POST["paciente"]) ? "" : test_input($_POST["paciente"]));
+        $nome = ($_POST["nome"]);
+        $paciente = ($_POST["paciente"]);
         $buscados = busca("paciente", array(array("nome", $nome)), false);
-        $observacao = (empty($_POST["observacao"]) ? "" : test_input($_POST["observacao"]));
-        $data = (empty($_POST["data"]) ? "" : test_input($_POST["data"])); 
-        $receita = (empty($_POST["receita"]) ? "" : test_input($_POST["receita"]));
+        $observacao = ($_POST["observacao"]);
+        $data = ($_POST["data"]); 
+        $receita = ($_POST["receita"]);
         $medico = $_SESSION["registro"];
 
         $buscados = busca("consulta", array(array("medico", $medico), array("observacao", $observacao), array("receita", $receita), array("data", $data), array("paciente", $paciente)), true);
@@ -74,13 +74,7 @@
             $optionsPacientes .= "<option name='optionsPacientes' value='" . $paciente->registro . "'>" . $paciente->nome . "</option>";
         }
     }
-    function test_input($data)
-    {
-        $data = trim($data);
-        $data = stripslashes($data);
-        $data = htmlspecialchars($data);
-        return $data;
-    }
+
     ?>
 
 <nav class="navbar navbar-expand-lg navbar-dark bg-dark">

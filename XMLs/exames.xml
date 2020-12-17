@@ -1,51 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <Exames>
-        <Exame>
-            <registro>1607441510</registro>
-            <laboratorio>68</laboratorio>
-            <paciente>665241</paciente>
-            <tipoExame>x</tipoExame>
-            <resultado>adjga</resultado>
-            <data>2020-12-16</data>
-        </Exame>
-        <Exame>
-            <registro>1607635581</registro>
-            <laboratorio>68</laboratorio>
-            <paciente>665241</paciente>
-            <tipoExame>x</tipoExame>
-            <resultado>1</resultado>
-            <data>2020-12-01</data>
-        </Exame>
-        <Exame>
-            <registro>1607635587</registro>
-            <laboratorio>68</laboratorio>
-            <paciente>665241</paciente>
-            <tipoExame>x</tipoExame>
-            <resultado>2</resultado>
-            <data>2020-12-01</data>
-        </Exame>
-        <Exame>
-            <registro>1607635594</registro>
-            <laboratorio>68</laboratorio>
-            <paciente>665241</paciente>
-            <tipoExame>x</tipoExame>
-            <resultado>3</resultado>
-            <data>2020-12-01</data>
-        </Exame>
-        <Exame>
-            <registro>1607636747</registro>
-            <laboratorio>68</laboratorio>
-            <paciente>1607439855</paciente>
-            <tipoExame>x</tipoExame>
-            <resultado>7</resultado>
-            <data>2020-12-31</data>
-        </Exame>
-<Exame>
-<registro>1607651660</registro>
-<laboratorio>68</laboratorio>
-<paciente>665241</paciente>
-<tipoExame>x</tipoExame>
-<resultado>wqrf</resultado>
-<data>2020-12-01</data>
-</Exame>
-<Exame><registro>1607654846</registro><laboratorio>68</laboratorio><paciente>665241</paciente><tipoExame>x</tipoExame><resultado>rsdjhdasrhasr</resultado><data>2020-12-01</data></Exame><Exame><registro>1607655217</registro><laboratorio>68</laboratorio><paciente>665241</paciente><tipoExame>x</tipoExame><resultado>sghasdg</resultado><data>2020-12-18</data></Exame><Exame><registro>1607655238</registro><laboratorio>68</laboratorio><paciente>665241</paciente><tipoExame>x</tipoExame><resultado>shsgawsga</resultado><data>2020-12-15</data></Exame><Exame><registro>1607655513</registro><laboratorio>68</laboratorio><paciente>665241</paciente><tipoExame>x</tipoExame><resultado>sdvgags</resultado><data>2020-12-23</data></Exame><Exame><registro>1607657262</registro><laboratorio>68</laboratorio><paciente>1607439850</paciente><tipoExame>x</tipoExame><resultado>srhdfgsad</resultado><data>2020-12-17</data></Exame></Exames>
+    <Exame>
+        <registro>1608088490</registro>
+        <laboratorio>1608086046</laboratorio>
+        <paciente>1608086583</paciente>
+        <tipoExame>Sangue</tipoExame>
+        <resultado>Tipo A+</resultado>
+        <data>2020-12-16</data>
+    </Exame>
+</Exames>

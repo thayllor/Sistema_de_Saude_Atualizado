@@ -1,36 +1,14 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <Medicos>
-        <Medico>
-            <registro>1</registro>
-            <nome>Joãozinh2</nome>
-            <email>Joãozinha@putx</email>
-            <senha>152</senha>
-            <endereco>djaiopms</endereco>
-            <telefone>1569486699</telefone>
-            <crm>1285214346</crm>
-            <especialidade>nenhuma</especialidade>
-            <idade>36</idade>
-        </Medico>
-        <Medico>
-            <registro>2</registro>
-            <nome>Joãozinha</nome>
-            <email>Joãozinha@putz</email>
-            <senha>158</senha>
-            <endereco>djaiopms</endereco>
-            <telefone>1569486699</telefone>
-            <crm>1285162146</crm>
-            <especialidade>nenhuma</especialidade>
-            <idade>54</idade>
-        </Medico>
-        <Medico>
-            <registro>3</registro>
-            <nome>xzinho</nome>
-            <email>x@x</email>
-            <senha>x</senha>
-            <endereco>uma casa</endereco>
-            <telefone>1569486699</telefone>
-            <crm>1285214346</crm>
-            <especialidade>nenhuma</especialidade>
-            <idade>36</idade>
-        </Medico>
-    </Medicos>
+    <Medico>
+        <registro>1608086971</registro>
+        <nome>Igor Oliveira</nome>
+        <email>igor@mail.com</email>
+        <senha>medico</senha>
+        <endereco>Rua General Portinho, 464, Centro, Rio Grande - RS</endereco>
+        <telefone>53984366433</telefone>
+        <crm>219210</crm>
+        <especialidade>Urologista</especialidade>
+        <idade>23</idade>
+    </Medico>
+</Medicos>

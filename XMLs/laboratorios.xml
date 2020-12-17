@@ -1,33 +1,13 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <Laboratorios>
-        <Laboratorio>
-            <registro>65</registro>
-            <email>x@y</email>
-            <senha>x</senha>
-            <nome>Não Sei</nome>
-            <endereco>oidsoi</endereco>
-            <telefone>xxxxxxx</telefone>
-            <cnpj>77</cnpj>
-            <tiposExames>x,y,e.9</tiposExames>
-        </Laboratorio>
-        <Laboratorio>
-            <registro>66</registro>
-            <email>y@r</email>
-            <senha>y</senha>
-            <nome>Não Sei2</nome>
-            <endereco>gesgesgesges</endereco>
-            <telefone>999999</telefone>
-            <cnpj>66</cnpj>
-            <tiposExames>x,l,e</tiposExames>
-        </Laboratorio>
-        <Laboratorio>
-            <registro>68</registro>
-            <email>x@x</email>
-            <senha>x</senha>
-            <nome>Lab 1</nome>
-            <endereco>xdxd</endereco>
-            <telefone>9865875858</telefone>
-            <cnpj>53229078000149</cnpj>
-            <tiposExames>x,l,e,</tiposExames>
-        </Laboratorio>
+    <Laboratorio>
+        <registro>1608086046</registro>
+        <email>contato@amaralcosta.com</email>
+        <senha>laboratorio</senha>
+        <nome>Clínica Amaral Costa</nome>
+        <endereco>Rua Getúlio Vargas, 123, Centro, Rio Grande - RS </endereco>
+        <telefone>1140028922</telefone>
+        <cnpj>37.223.552/0001-79</cnpj>
+        <tiposExames>Sangue, Urina</tiposExames>
+    </Laboratorio>
 </Laboratorios>
