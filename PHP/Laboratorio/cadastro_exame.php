@@ -39,10 +39,10 @@
     $method = $_SERVER["REQUEST_METHOD"];
     if ($method == "POST") {
         
-        $paciente = ($_POST["paciente"]);
-        $data = ($_POST["data"]);
-        $resultado = ($_POST["resultado"]);
-        $tipoExame = ($_POST["tipoExame"]);
+        $paciente = $_POST["paciente"];
+        $data = $_POST["data"];
+        $resultado = $_POST["resultado"];
+        $tipoExame = $_POST["tipoExame"];
         $buscados = busca("exame", array(array("tipoExame", $tipoExame), array("resultado", $resultado), array("data", $data), array("paciente", $paciente)), true);
         print_r($buscados);
         if (empty($buscados)){

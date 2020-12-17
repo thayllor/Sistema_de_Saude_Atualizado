@@ -37,15 +37,15 @@
     $method = $_SERVER["REQUEST_METHOD"];
     if ($method == "POST") {
 
-        $email = (empty($_POST["email"]) ? "" : test_input($_POST["email"]));
-        $senha = (empty($_POST["senha"]) ? "" : test_input($_POST["senha"]));
-        $nome = (empty($_POST["nome"]) ? "" : test_input($_POST["nome"]));
-        $endereco = (empty($_POST["endereco"]) ? "" : test_input($_POST["endereco"]));
-        $telefone = (empty($_POST["telefone"]) ? "" : test_input($_POST["telefone"]));
-        $genero = (empty($_POST["genero"]) ? "" : test_input($_POST["genero"]));
-        $cpf = (empty($_POST["cpf"]) ? "" : test_input($_POST["cpf"]));
-        $genero = (empty($_POST["genero"]) ? "" : test_input($_POST["genero"]));
-        $idade = (empty($_POST["idade"]) ? "" : test_input($_POST["idade"]));
+        $email = $_POST["email"];
+        $senha = $_POST["senha"];
+        $nome = $_POST["nome"];
+        $endereco = $_POST["endereco"];
+        $telefone = $_POST["telefone"];
+        $genero = $_POST["genero"];
+        $cpf = $_POST["cpf"];
+        $genero = $_POST["genero"];
+        $idade = $_POST["idade"];
         $buscados = busca("paciente", array(array("email", $email), array("nome", $nome), array("cpf", $cpf)), false);
         $cpf = clearString($cpf);
         $telefone = clearString($telefone);
@@ -103,16 +103,6 @@
         $tiposExames = $paciente->tiposExames;
     }
 
-    function test_input($data)
-    {
-        $data = trim($data);
-        $data = stripslashes($data);
-        $data = htmlspecialchars($data);
-        return $data;
-    }
-    /*<option value="M">Masculino</option>
-            <option value="F">Feminino</option>
-            <option value="O">Outros</option>*/
     $options = "";
     if ($genero == "M") {
         $options = '<option value="M" selected>Masculino</option>

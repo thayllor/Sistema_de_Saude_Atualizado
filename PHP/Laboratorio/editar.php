@@ -39,14 +39,15 @@
     $method = $_SERVER["REQUEST_METHOD"];
     if ($method == "POST") {
 
-        $email = (empty($_POST["email"]) ? "" : test_input($_POST["email"]));
-        $senha = (empty($_POST["senha"]) ? "" : test_input($_POST["senha"]));
-        $nome = (empty($_POST["nome"]) ? "" : test_input($_POST["nome"]));
-        $endereco = (empty($_POST["endereco"]) ? "" : test_input($_POST["endereco"]));
-        $telefone = (empty($_POST["telefone"]) ? "" : test_input($_POST["telefone"]));
-        $cnpj = (empty($_POST["cnpj"]) ? "" : test_input($_POST["cnpj"]));
-        $tiposExames = (empty($_POST["tiposExames"]) ? "" : test_input($_POST["tiposExames"])); //(empty($_POST["tipo_de_exame"]) ? "" : test_input($_POST["tipo_de_exame"]));
-        $buscados = busca("laboratorio", array(array("email", $email), array("nome", $nome), array("cnpj", $cnpj)), false);
+        $email = $_POST["email"];
+        $senha = $_POST["senha"];
+        $nome = $_POST["nome"];
+        $endereco = $_POST["endereco"];
+        $telefone = $_POST["telefone"];
+        $cnpj = $_POST["cnpj"];
+        $tiposExames = $_POST["tiposExames"];
+        $buscados = busca("laboratorio", array(array("email", $email), array("nome", $nome),
+         array("cnpj", $cnpj)), false);
 
         $cnpj = clearString($cnpj);
         $telefone = clearString($telefone);
@@ -69,7 +70,7 @@
             $xml = simplexml_load_file("../../XMLs/laboratorios.xml");
             foreach ($xml as $lab) {
 
-                //echo $xml[$i]->registro . " = " . $_SESSION["registro"] . "<br>";
+               
                 if ((float)$lab->registro == (float)$_SESSION["registro"]) {
                     $lab->nome = $nome;
                     $lab->email = $email;
@@ -100,13 +101,6 @@
         $tiposExames = $laboratorio->tiposExames;
     }
 
-    function test_input($data)
-    {
-        $data = trim($data);
-        $data = stripslashes($data);
-        $data = htmlspecialchars($data);
-        return $data;
-    }
     ?>
 
 

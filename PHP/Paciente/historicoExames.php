@@ -22,7 +22,6 @@
 
     <?php
     include "../functions.php";
-
     session_start();
     if (count($_SESSION) == 0) {
         redirect("./../Login/login.php");
@@ -30,16 +29,11 @@
     if($_SESSION["type"] != "paciente"){
         redirect("./../Login/login.php");
     }
-
     $paciente = checkUser($_SESSION["email"], $_SESSION["senha"], $_SESSION["type"]);
-
     $err = "";
-
     $method = $_SERVER["REQUEST_METHOD"];
-
     $laboratorios = simplexml_load_file("../../XMLs/laboratorios.xml");
     $exames = simplexml_load_file("../../XMLs/exames.xml");
-
     $lista = "";
     foreach ($laboratorios as $lab) {
         $found = false;

@@ -35,13 +35,13 @@
     $email = $senha = $nome = $endereco = $telefone = $crm = $especialidade = "";
     $method = $_SERVER["REQUEST_METHOD"];
     if ($method == "POST") {
-        $email = (empty($_POST["email"]) ? "" : test_input($_POST["email"]));
-        $senha = (empty($_POST["senha"]) ? "" : test_input($_POST["senha"]));
-        $nome = (empty($_POST["nome"]) ? "" : test_input($_POST["nome"]));
-        $endereco = (empty($_POST["endereco"]) ? "" : test_input($_POST["endereco"]));
-        $telefone = (empty($_POST["telefone"]) ? "" : test_input($_POST["telefone"]));
-        $crm = (empty($_POST["crm"]) ? "" : test_input($_POST["crm"]));
-        $especialidade = (empty($_POST["especialidade"]) ? "" : test_input($_POST["especialidade"]));
+        $email = $_POST["email"];
+        $senha = $_POST["senha"];
+        $nome = $_POST["nome"];
+        $endereco = $_POST["endereco"];
+        $telefone = $_POST["telefone"];
+        $crm = $_POST["crm"];
+        $especialidade = $_POST["especialidade"];
         $crm = clearString($crm);
         $telefone = clearString($telefone);
         $buscados = busca("medico", array(array("email", $email), array("nome", $nome), array("crm", $crm)), false);
@@ -98,13 +98,6 @@
         $idade= $medico->idade;
     }
 
-    function test_input($data)
-    {
-        $data = trim($data);
-        $data = stripslashes($data);
-        $data = htmlspecialchars($data);
-        return $data;
-    }
     ?>
 
 

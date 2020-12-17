@@ -22,10 +22,8 @@
 </head>
 
 <body>
-
     <?php
     include "../functions.php";
-
     session_start();
     if (count($_SESSION) == 0) {
         redirect("./../Login/login.php");
@@ -33,37 +31,24 @@
     if($_SESSION["type"] != "medico"){
         redirect("./../Login/login.php");
     }
-
     $medico = checkUser($_SESSION["email"], $_SESSION["senha"], $_SESSION["type"]);
-
     $err = "";
     $lista = "";
     $nome = $nomeErr = "";
-
     $method = $_SERVER["REQUEST_METHOD"];
-
     if ($method == "POST") {
-
-        $nome = (empty($_POST["nome"]) ? "" : test_input($_POST["nome"]));
-
+        $nome = $_POST["nome"];
         $buscados = busca("paciente", array(array("nome", $nome)), false);
-
         $pacreg = "";
-
         foreach ($buscados as $buscado) {
             if ($buscado->nome == $nome) {
                 $pacreg = $buscado->registro;
             }
         }
-
         if ($pacreg == "") {
-
             echo "<br>Paciente não encontrado!<br>";
-
         } else {
-
             $consultas = simplexml_load_file("../../XMLs/consultas.xml");
-
             foreach ($consultas as $consulta) {
                 if ((int)$consulta->medico == $_SESSION["registro"] && (int)$consulta->paciente == $pacreg) {
                     $lista .= "Data da Consulta: " . $consulta->data . "<br>";
@@ -71,20 +56,10 @@
                     $lista .= "Observacao: " . $consulta->observacao . "<br><hr><br>";
                 }
             }
-
             if ($lista == "") {
                 $lista = "<h4>Lista Vazia</h4>";
             }
-
         }
-    }
-
-    function test_input($data)
-    {
-        $data = trim($data);
-        $data = stripslashes($data);
-        $data = htmlspecialchars($data);
-        return $data;
     }
     ?>
     
