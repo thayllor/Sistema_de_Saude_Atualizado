@@ -7,7 +7,7 @@
         <nome>Clínica Amaral Costa</nome>
         <endereco>Rua Getúlio Vargas, 123, Centro, Rio Grande - RS </endereco>
         <telefone>1140028922</telefone>
-        <cnpj>37.223.552/0001-79</cnpj>
+        <cnpj>37223552000179</cnpj>
         <tiposExames>Sangue, Urina</tiposExames>
     </Laboratorio>
-</Laboratorios>
+<Laboratorio><registro>1608238468</registro><email>lab2@mail.com</email><senha>123</senha><nome>Laboratorio 2</nome><endereco>endereço 3</endereco><telefone>53996175844</telefone><cnpj>82.993.565/0001-81</cnpj><tiposExames>sangue, urina</tiposExames></Laboratorio><Laboratorio><registro>1608239140</registro><email>lab3@mail.com</email><senha>123</senha><nome>Laboratorio 3</nome><endereco>endereço 1</endereco><telefone>53699698744</telefone><cnpj>82269030000162</cnpj><tiposExames>Sangue, Urina, Fezes</tiposExames></Laboratorio></Laboratorios>

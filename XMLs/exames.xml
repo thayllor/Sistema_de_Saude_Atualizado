@@ -8,4 +8,4 @@
         <resultado>Tipo A+</resultado>
         <data>2020-12-16</data>
     </Exame>
-</Exames>
+<Exame><registro>1608238853</registro><laboratorio>1608086046</laboratorio><paciente>1608086583</paciente><tipoExame> Urina</tipoExame><resultado>de boa</resultado><data>2020-12-17</data></Exame><Exame><registro>1608239360</registro><laboratorio>1608239140</laboratorio><paciente>1608086583</paciente><tipoExame>Sangue</tipoExame><resultado>Tipo B</resultado><data>2020-12-18</data></Exame><Exame><registro>1608239434</registro><laboratorio>1608239140</laboratorio><paciente>1608238676</paciente><tipoExame> Urina</tipoExame><resultado>resultado</resultado><data>2020-12-19</data></Exame></Exames>

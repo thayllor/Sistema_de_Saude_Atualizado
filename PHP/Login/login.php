@@ -21,6 +21,7 @@
 <body>
 
     <?php
+    include_once('conect.php');
     include "../functions.php";
     session_start();
 
@@ -28,16 +29,36 @@
     $err = "";
     $email = $senha = $type = "";
     $method = $_SERVER["REQUEST_METHOD"];
+    $user = new User();
     if ($method == "POST") {
-        $email = (empty($_POST["email"]) ? "" : test_input($_POST["email"]));
-        $senha = (empty($_POST["senha"]) ? "" : test_input($_POST["senha"]));
-        $type = (empty($_POST["type"]) ? "" : test_input($_POST["type"]));
-        $user = checkUser($email, $senha, $type);
-        if ($user != false) {
+        $email = $_POST["email"];
+        $senha = $_POST["senha"];
+        $type = $_POST["type"];
+        $user-> email= $email;
+        $user-> senha= $senha;
+        try{
+            if($type == "paciente" ){
+               $err= $user->verifica_paciente();
+            }
+            if($type == "medico" ){
+                $err= $user->verifica_medicos();
+            }
+            if($type == "admin" ){
+                $err= $user->verifica_admin();
+            }
+            if($type == "laboratorio" ){
+                $err= $user->verifica_laboratorios();
+            }
+        }
+        catch(Exception $e){
+			echo $e->getMessage();
+			}
+       
+    
+        if ($user->verificado) {
             $_SESSION["email"] = $email;
             $_SESSION["senha"] = $senha;
             $_SESSION["type"] = $type;
-            $_SESSION["registro"] = (float)$user->registro;
             if($_SESSION["type"]=="admin") {
                 redirect("./../Admin/index.php");
             }
@@ -54,22 +75,10 @@
             session_unset();
         };
 
-        if (count($_SESSION) == 0) {
-            $err = "Credenciais Inválidas";
-        }
     } else {
         session_unset();
     }
 
-
-
-    function test_input($data)
-    {
-        $data = trim($data);
-        $data = stripslashes($data);
-        $data = htmlspecialchars($data);
-        return $data;
-    }
     ?>
 
   

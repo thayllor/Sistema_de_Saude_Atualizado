@@ -11,4 +11,4 @@
         <genero>M</genero>
         <idade>21</idade>        
     </Paciente>
-</Pacientes>
+<Paciente><registro>1608238676</registro><email>pas2@gmail.com</email><senha>123</senha><nome>paciente2</nome><endereco>endereço 2</endereco><telefone>53666987144</telefone><cpf>72520708085</cpf><genero>M</genero><idade>28</idade></Paciente></Pacientes>

@@ -11,4 +11,4 @@
         <especialidade>Urologista</especialidade>
         <idade>23</idade>
     </Medico>
-</Medicos>
+<Medico><registro>1608238132</registro><nome>medico 2</nome><email>medico2@mail.com</email><senha>123</senha><endereco>endereço 2</endereco><telefone>53999691999</telefone><crm>251432165461</crm><especialidade>geral</especialidade><idade>22</idade></Medico></Medicos>

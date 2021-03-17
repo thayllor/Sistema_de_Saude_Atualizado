@@ -8,4 +8,4 @@
         <receita>Xarope</receita>
         <observacao>Câncer de prostata</observacao>
     </Consulta>
-</Consultas>
+<Consulta><registro>1608239553</registro><data>2020-12-17</data><medico>1608086971</medico><paciente>1608238676</paciente><receita>receita 1</receita><observacao>obs1 </observacao></Consulta></Consultas>
