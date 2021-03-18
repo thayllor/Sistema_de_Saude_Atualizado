@@ -19,11 +19,13 @@
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" integrity="sha384-JcKb8q3iqJ61gNV9KGb8thSsNjpSL0n8PARn9HuZOnIxN0hoP+VmmDGMN5t9UJ0Z" crossorigin="anonymous">
 
 </head>
-
+ 
 <body>
 
     <?php
+    include_once('con_consulta.php');
     include "../functions.php";
+    
     session_start();
     if (count($_SESSION) == 0) {
         redirect("./../Login/login.php");
@@ -32,47 +34,29 @@
         redirect("./../Login/login.php");
     }
 
-    // define variables and set to empty values
     $emailErr = $nomeErr = $optionsPacientes= "";
-    $nome = $receita = $observacao = $data = "";
+    $nome = $receita = $observacao = $data = $medico = "" ;
     $method = $_SERVER["REQUEST_METHOD"];
     if ($method == "POST") {
 
         $nome = ($_POST["nome"]);
         $paciente = ($_POST["paciente"]);
-        $buscados = busca("paciente", array(array("nome", $nome)), false);
         $observacao = ($_POST["observacao"]);
         $data = ($_POST["data"]); 
         $receita = ($_POST["receita"]);
         $medico = $_SESSION["registro"];
-
-        $buscados = busca("consulta", array(array("medico", $medico), array("observacao", $observacao), array("receita", $receita), array("data", $data), array("paciente", $paciente)), true);
-
-
-        if (empty($buscados)){
-            echo "<br>Consulta já existe!<br>";
+        $err=$medico->salva_consulta($data,$medico,$paciente,$receita,$observacao,$nome);
+        if($err=="existente"){
+            $consistenciaERR="A consulta ja existe";
         } else {
-
-            $registro = (int)microtime(true);
-            $xml = simplexml_load_file("../../XMLs/consultas.xml");
-            $xml_nova_consulta = $xml->addChild("Consulta");
-            $xml_nova_consulta->addChild('registro', $registro);
-            $xml_nova_consulta->addChild('data', $data);
-            $xml_nova_consulta->addChild('medico', $medico);
-            $xml_nova_consulta->addChild('paciente', $paciente);
-            $xml_nova_consulta->addChild('receita', $receita);
-            $xml_nova_consulta->addChild('observacao', $observacao);
-            $xml->saveXML("../../XMLs/consultas.xml");
+            $nome = $receita = $observacao = $paciente = $medico = $optionsPacientes = $err = $consistenciaERR="";
             redirect("index.php");
-
         }
-    } else {
-        $pacientes = simplexml_load_file("../../XMLs/pacientes.xml");
+    }
+    $pacientes = $medico->pacientes();
+    foreach ($pacientes as $paciente) {
 
-        foreach ($pacientes as $paciente) {
-
-            $optionsPacientes .= "<option name='optionsPacientes' value='" . $paciente->registro . "'>" . $paciente->nome . "</option>";
-        }
+        $optionsPacientes .= "<option name='optionsPacientes' value='" . $paciente->id . "'>" . $paciente->nome . "</option>";
     }
 
     ?>
