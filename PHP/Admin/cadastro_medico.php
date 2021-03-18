@@ -26,6 +26,7 @@
 <body>
 
     <?php
+    include_once('con_admin.php');
     include "../functions.php";
     session_start();
     if (count($_SESSION) == 0) {
@@ -36,6 +37,7 @@
     }
     // define variables and set to empty values
     $erro = "";
+    $admin= new Admin();
     $emailErr = $nomeErr = $crmErr = $telefoneErr = $senhaErr = "";
     $email = $senha = $nome = $endereco = $telefone = $crm = $especialidade = $idade= "";
     $method = $_SERVER["REQUEST_METHOD"];
@@ -48,34 +50,17 @@
         $crm = $_POST["crm"];
         $especialidade = $_POST["especialidade"];
         $idade= $_POST["idade"];
-        $buscados = busca("medico", array(array("email", $email), array("nome", $nome), array("crm", $crm)), false);
-        $registro = (int)microtime(true);
-        foreach ($buscados as $buscado) {
-
-            if ($buscado->nome == $nome) {
-                $nomeErr = "Nome em Uso";
-            }
-            if ($buscado->email == $email) {
-                $emailErr = "Email em Uso";
-            }
-            if ($buscado->crm == $crm) {
-                $crmErr = "Crm em Uso";
-            }
-        }
-        if (!($nomeErr != "" || $emailErr != "" || $crmErr != "")) {
-            $xml = simplexml_load_file("../../XMLs/medicos.xml");
-            $xml_novo_lab = $xml->addChild("Medico");
-            $xml_novo_lab->addChild('registro', $registro);
-            $xml_novo_lab->addChild('nome', $nome);
-            $xml_novo_lab->addChild('email', $email);
-            $xml_novo_lab->addChild('senha', $senha);
-            $xml_novo_lab->addChild('endereco', $endereco);
-            $xml_novo_lab->addChild('telefone', $telefone);
-            $xml_novo_lab->addChild('crm', $crm);
-            $xml_novo_lab->addChild('especialidade', $especialidade);
-            $xml_novo_lab->addChild('idade', $idade);
-            $xml->saveXML("../../XMLs/medicos.xml");
+        $err=$admin->salva_medico($email,$senha,$nome,$endereco,$especialidade,$telefone,$crm,$idade);
+        if($err=="sucesso"){
+            $emailErr = $nomeErr = $crmErr = $telefoneErr = $senhaErr = "";
             redirect("index.php");
+        }elseif($err=="email"){
+            $emailErr="email em uso";
+
+        }elseif($err=="crm"){
+            $crmErr="CRM em uso";
+        }elseif($err=="nome"){
+            $nomeErr="Nome já cadastrado";
         }
     }
     ?>

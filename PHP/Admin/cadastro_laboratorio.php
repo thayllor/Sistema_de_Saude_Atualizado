@@ -21,6 +21,7 @@
 <body>
 
     <?php
+    include_once('con_admin.php');
     include "../functions.php";
     session_start();
     if (count($_SESSION) == 0) {
@@ -30,11 +31,11 @@
         redirect("./../Login/login.php");
     }
     $err = "";
+    $admin=new Admin();
     $emailErr = $nomeErr = $cnpjErr = $telefoneErr = $senhaErr = "";
     $email = $senha = $genero = $nome = $endereco = $telefone = $cnpj = $tiposExames = "";
     $method = $_SERVER["REQUEST_METHOD"];
     if ($method == "POST") {
-        //echo "e2";
         $email = $_POST["email"];
         $senha = $_POST["senha"];
         $nome = $_POST["nome"];
@@ -42,33 +43,17 @@
         $telefone = $_POST["telefone"];
         $cnpj = $_POST["cnpj"];
         $tiposExames = $_POST["tiposExames"];
-        $buscados = busca("laboratorio", array(array("email", $email), array("nome", $nome), array("cnpj", $cnpj)), false);
-        $registro = (int)microtime(true);
-        foreach ($buscados as $buscado) {
-
-            if ($buscado->nome == $nome) {
-                $nomeErr = "Nome em Uso";
-            }
-            if ($buscado->email == $email) {
-                $emailErr = "Email em Uso";
-            }
-            if ($buscado->cnpj == $cnpj) {
-                $cnpjErr = "Cnpj em Uso";
-            }
-        }
-        if (!($nomeErr != "" || $emailErr != "" || $cnpjErr != "")) {
-            $xml = simplexml_load_file("../../XMLs/laboratorios.xml");
-            $xml_novo_lab = $xml->addChild("Laboratorio");
-            $xml_novo_lab->addChild('registro', $registro);
-            $xml_novo_lab->addChild('email', $email);
-            $xml_novo_lab->addChild('senha', $senha);
-            $xml_novo_lab->addChild('nome', $nome);
-            $xml_novo_lab->addChild('endereco', $endereco);
-            $xml_novo_lab->addChild('telefone', $telefone);
-            $xml_novo_lab->addChild('cnpj', $cnpj);
-            $xml_novo_lab->addChild('tiposExames', $tiposExames);
-            $xml->saveXML("../../XMLs/laboratorios.xml");
+        $err=$admin->salva_laboratorio($email,$senha,$nome,$endereco,$telefone,$cnpj,$tipos);
+        if($err=="sucesso"){
+            $emailErr = $nomeErr = $crmErr = $telefoneErr = $senhaErr = "";
             redirect("index.php");
+        }elseif($err=="email"){
+            $emailErr="email em uso";
+
+        }elseif($err=="cnpj"){
+            $crmErr="CNPJ em uso";
+        }elseif($err=="nome"){
+            $nomeErr="Nome já cadastrado";
         }
     }
     ?>

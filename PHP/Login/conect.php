@@ -46,7 +46,7 @@ class User{
 	}
     public function verifica_paciente(){
 
-		$rs = $this->conexao->query("SELECT * FROM pacientes WHERE email = ?");
+		$rs = $this->conexao->prepare("SELECT * FROM pacientes WHERE email = ?");
 		$rs->bindParam(1, $this->email);
 		$rs->execute();
 		$row = $rs->fetch(PDO::FETCH_OBJ);
@@ -71,7 +71,7 @@ class User{
 	}
     public function verifica_laboratorios(){
 
-		$rs = $this->conexao->query("SELECT * FROM laboratorios WHERE email = ?");
+		$rs = $this->conexao->prepare("SELECT * FROM laboratorios WHERE email = ?");
 		$rs->bindParam(1, $this->email);
 		$rs->execute();
 		$row = $rs->fetch(PDO::FETCH_OBJ);
@@ -95,7 +95,7 @@ class User{
 	}
     public function verifica_medicos(){
 
-		$rs = $this->conexao->query("SELECT * FROM medicos WHERE email = ?");
+		$rs = $this->conexao->prepare("SELECT * FROM medicos WHERE email = ?");
 		$rs->bindParam(1, $this->email);
 		$rs->execute();
 		$row = $rs->fetch(PDO::FETCH_OBJ);

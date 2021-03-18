@@ -22,6 +22,8 @@
 <body>
 
     <?php
+    
+    include_once('con_laboratorio.php');
     include "../functions.php";
 
     session_start();
@@ -32,49 +34,35 @@
         redirect("./../Login/login.php");
     }
     
-
-    $laboratorio = checkUser($_SESSION["email"], $_SESSION["senha"], $_SESSION["type"]);
-    $err = "";
-    $registro = $paciente = $tipoExame = $resultado = $data = $optionsPacientes = $optionsTipoExame = "";
+    
+    $lab= new Lab($_SESSION["email"]);
+    $registro = $paciente = $tipoExame = $resultado = $data = $optionsPacientes = $optionsTipoExame = $err = $consistenciaERR="";
     $method = $_SERVER["REQUEST_METHOD"];
     if ($method == "POST") {
         
-        $paciente = $_POST["paciente"];
+        $pacienteID = $_POST["pacienteID"];
         $data = $_POST["data"];
         $resultado = $_POST["resultado"];
         $tipoExame = $_POST["tipoExame"];
-        $buscados = busca("exame", array(array("tipoExame", $tipoExame), array("resultado", $resultado), array("data", $data), array("paciente", $paciente)), true);
-        print_r($buscados);
-        if (empty($buscados)){
-            echo "<br>Exame já existe!<br>";
+        $err=$lab->salva_exame($tipoExame,$resultado,$data,$pacienteID);
+        if($err=="existente"){
+            $consistenciaERR="O exame ja existe";
         } else {
-
-            $xml = simplexml_load_file("../../XMLs/exames.xml");
-            $xml_exame = $xml->addChild("Exame");
-            $xml_exame->addChild('registro', (int)microtime(true));
-            $xml_exame->addChild('laboratorio', $laboratorio->registro );
-            $xml_exame->addChild('paciente', $paciente);
-            $xml_exame->addChild('tipoExame', $tipoExame);
-            $xml_exame->addChild('resultado', $resultado);
-            $xml_exame->addChild('data', $data);
-            $xml->saveXML("../../XMLs/exames.xml");
+            $registro = $paciente = $tipoExame = $resultado = $data = $optionsPacientes = $optionsTipoExame = $err = $consistenciaERR="";
             redirect("index.php");
-
-        }
-    } else {
-        $pacientes = simplexml_load_file("../../XMLs/pacientes.xml");
-
-        foreach ($pacientes as $paciente) {
-
-            $optionsPacientes .= "<option name='optionsPacientes' value='" . $paciente->registro . "'>" . $paciente->nome . "</option>";
-        }
-
-        $tiposExames = explode(",", $laboratorio->tiposExames);
-
-        foreach ($tiposExames as $tipoExame) {
-            $optionsTipoExame .= "<option name='optionsExames' value='" . $tipoExame . "'>" . $tipoExame . "</option>";
         }
     }
+    $pacientes = $lab->pacientes();
+    foreach ($pacientes as $paciente) {
+
+        $optionsPacientes .= "<option name='optionsPacientes' value='" . $paciente->id . "'>" . $paciente->nome . "</option>";
+    }
+
+    $tiposExames = explode(",", $lab->tipos);
+    foreach ($tiposExames as $tipoExame) {
+        $optionsTipoExame .= "<option name='optionsExames' value='" . $tipoExame . "'>" . $tipoExame . "</option>";
+    }
+
 
     ?>
 
@@ -97,9 +85,10 @@
     <h1>Cadastro de Exame </h1>
     <form method="post" id="cadastro_form" action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]); ?>">
     <div class="container" align="center" >
+    <span class="error" id="consistenciaERR"><?php echo $consistenciaERR; ?></span>
         <div class="col" align="center">
             <label for="paciente">Paciente:</label>
-            <select name="paciente" class="form-control" id="paciente" required>
+            <select name="pacienteID" class="form-control" id="pacienteID" required>
                 <?php echo $optionsPacientes; ?>
             </select>
             <label for="tipoExame">Tipo de Exame:</label>

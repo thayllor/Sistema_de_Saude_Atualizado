@@ -21,7 +21,7 @@
 <body>
 
     <?php
-    include "../functions.php";
+    include_once('con_admin.php');
     session_start();
     if (count($_SESSION) == 0) {
         redirect("./../Login/login.php");
@@ -34,7 +34,7 @@
     $nome_atual=
     $err = "";
     $emailErr = $nomeErr = $cpfErr = $telefoneErr = $senhaErr = "";
-
+    $admin= new Admin();
     $email = $senha = $genero = $nome = $endereco = $telefone = $cpf = $idade = "";
     $method = $_SERVER["REQUEST_METHOD"];
     if ($method == "POST") {
@@ -46,36 +46,21 @@
         $telefone = $_POST["telefone"];
         $cpf = $_POST["cpf"];
         $idade = $_POST["idade"];
-        $buscados = busca("paciente", array(array("email", $email), array("nome", $nome), array("cpf", $cpf)), false);
-        $registro = (int)microtime(true);
-        foreach ($buscados as $buscado) {
-
-            if ($buscado->nome == $nome) {
-                $nomeErr = "Nome em Uso";
-            }
-            if ($buscado->email == $email) {
-                $emailErr = "Email em Uso";
-            }
-            if ($buscado->cpf == $cpf) {
-                $cpfErr = "CPF em Uso";
-            }
-        }
-        if (!($nomeErr != "" || $emailErr != "" || $cpfErr != "")) {
-            $xml = simplexml_load_file("../../XMLs/pacientes.xml");
-            $xml_novo_lab = $xml->addChild("Paciente");
-            $xml_novo_lab->addChild('registro', $registro);
-            $xml_novo_lab->addChild('email', $email);
-            $xml_novo_lab->addChild('senha', $senha);
-            $xml_novo_lab->addChild('nome', $nome);
-            $xml_novo_lab->addChild('endereco', $endereco);
-            $xml_novo_lab->addChild('telefone', $telefone);
-            $xml_novo_lab->addChild('cpf', $cpf);
-            $xml_novo_lab->addChild('genero', $genero);
-            $xml_novo_lab->addChild('idade', $idade);
-            $xml->saveXML("../../XMLs/pacientes.xml");
+        $err=$admin->salva_paciente($email,$senha,$nome,$endereco,$telefone,$cpf,$genero,$idade );
+        if($err=="sucesso"){
+            $emailErr = $nomeErr = $cpfErr = $telefoneErr = $senhaErr = "";
             redirect("index.php");
+        }elseif($err=="email"){
+            $emailErr="email em uso";
 
+        }elseif($err=="cpf"){
+            $cpfErr="CPF em uso";
+        }elseif($err=="nome"){
+            $nomeErr="Nome já cadastrado";
         }
+        
+
+        
     }
     ?>
 
@@ -104,26 +89,26 @@
         <div class="form-row">
             <div class="col">
                 <label for="nome">Nome:</label>
-                <input type="text" class="form-control" id="nome" placeholder="Digite o nome aqui" name="nome" required<?php echo $nome; ?>> <br><br>
-                <span class="error" id="nomeErr"><?php echo $nomeErr; ?></span><br>
+                <input type="text" class="form-control" id="nome" placeholder="Digite o nome aqui" name="nome" required<?php echo $nome; ?>> 
+                <span class="error" id="nomeErr"><?php echo $nomeErr; ?></span><br><br><br>
             </div>
             <div class="col">
                 <label for="email">Email:</label>
-                <input type="text" class="form-control" id="email" placeholder="Digite o email aqui" name="email" required <?php echo $email; ?>> <br><br>
-                <span class="error" id="emailErr"><?php echo $emailErr; ?></span><br>
+                <input type="text" class="form-control" id="email" placeholder="Digite o email aqui" name="email" required <?php echo $email; ?>> 
+                <span class="error" id="emailErr"><?php echo $emailErr; ?></span><br><br><br>
             </div>
         </div>
 
         <div class="form-row">
             <div class="col">
                 <label for="cpf">CPF:</label>
-                <input type="text" class="form-control" id="cpf" placeholder="Digite o Cpf aqui" name="cpf" required<?php echo $cpf; ?>> <br><br>
-                <span class="error" id="cpfErr"><?php echo $cpfErr; ?></span><br>
+                <input type="text" class="form-control" id="cpf" placeholder="Digite o Cpf aqui" name="cpf" required<?php echo $cpf; ?>> 
+                <span class="error" id="cpfErr"><?php echo $cpfErr; ?></span><br><br><br>
             </div>
             <div class="col">
                 <label for="telefone">Telefone:</label>
-                <input type="text" class="form-control" id="telefone" placeholder="Digite o telefone aqui" name="telefone" required <?php echo $telefone; ?>> <br><br>
-                <span class="error" id="telefoneErr"><?php echo $telefoneErr; ?></span><br>
+                <input type="text" class="form-control" id="telefone" placeholder="Digite o telefone aqui" name="telefone" required <?php echo $telefone; ?>> 
+                <span class="error" id="telefoneErr"><?php echo $telefoneErr; ?></span><br><br><br>
             </div>
         </div>
 
