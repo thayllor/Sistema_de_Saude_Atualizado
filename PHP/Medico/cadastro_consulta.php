@@ -23,7 +23,7 @@
 <body>
 
     <?php
-    include_once('con_consulta.php');
+    include_once('./con_medico.php');
     include "../functions.php";
     
     session_start();
@@ -33,10 +33,16 @@
     if($_SESSION["type"] != "medico"){
         redirect("./../Login/login.php");
     }
-
+    $medico= new Medico($_SESSION["email"]);
     $emailErr = $nomeErr = $optionsPacientes= "";
-    $nome = $receita = $observacao = $data = $medico = "" ;
+    $nome = $receita = $observacao = $data = "" ;
     $method = $_SERVER["REQUEST_METHOD"];
+    $pacientes = $medico->pacientes();
+    foreach ($pacientes as $paciente) {
+
+        $optionsPacientes .= "<option name='optionsPacientes' value='" . $paciente->id . "'>" . $paciente->nome . "</option>";
+    }
+
     if ($method == "POST") {
 
         $nome = ($_POST["nome"]);
@@ -44,8 +50,7 @@
         $observacao = ($_POST["observacao"]);
         $data = ($_POST["data"]); 
         $receita = ($_POST["receita"]);
-        $medico = $_SESSION["registro"];
-        $err=$medico->salva_consulta($data,$medico,$paciente,$receita,$observacao,$nome);
+        $err=$medico->salva_consulta($data,$paciente,$receita,$observacao,$nome);
         if($err=="existente"){
             $consistenciaERR="A consulta ja existe";
         } else {
@@ -53,11 +58,7 @@
             redirect("index.php");
         }
     }
-    $pacientes = $medico->pacientes();
-    foreach ($pacientes as $paciente) {
-
-        $optionsPacientes .= "<option name='optionsPacientes' value='" . $paciente->id . "'>" . $paciente->nome . "</option>";
-    }
+    
 
     ?>
 
@@ -85,9 +86,11 @@
     <div class="container" align="center" >
         <div class="col" align="center">
             <label for="paciente">Paciente:</label>
+            <br>
             <select name="paciente" class="form-control" id="paciente" required>
                 <?php echo $optionsPacientes; ?>
             </select>
+            <br>
            
             
             <div class="form-row">

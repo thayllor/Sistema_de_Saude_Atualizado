@@ -28,7 +28,7 @@ class Lab{
 		$this->endereco = $row-> endereco;
 		$this->telefone = $row-> telefone;
 		$this->cnpj = $row-> cnpj;
-		$rs= $this->conexao->prepare("SELECT COUNT(*) FROM exames WHERE pacienteID= ?  ");
+		$rs= $this->conexao->prepare("SELECT COUNT(*) FROM exames WHERE laboratorioID= ?  ");
         $rs->bindParam(1, $this->id);
 		$rs->execute();
         $this->countExames= $rs->fetchColumn();
@@ -92,7 +92,7 @@ class Lab{
 			return"cnpj";
 
 		}else{
-			$rs= $this->conexao->prepare("UPDATE laboratorios SET email = ?, senha = ?, nome = ?, endereco = ?, telefone + ?, cnpj = ?, tipos = ?, WHERE id = ?");
+			$rs= $this->conexao->prepare("UPDATE laboratorios SET email = ?, senha = ?, nome = ?, endereco = ?, telefone + ?, cnpj = ?, tipos = ? WHERE id = ?");
 			$rs->bindParam(1, $email);
 			$rs->bindParam(2, $senha);
 			$rs->bindParam(3, $nome);

@@ -23,6 +23,7 @@
 
 <body>
     <?php
+    include_once("./con_medico.php");
     include "../functions.php";
     session_start();
     if (count($_SESSION) == 0) {
@@ -31,34 +32,31 @@
     if($_SESSION["type"] != "medico"){
         redirect("./../Login/login.php");
     }
-    $medico = checkUser($_SESSION["email"], $_SESSION["senha"], $_SESSION["type"]);
-    $err = "";
-    $lista = "";
-    $nome = $nomeErr = "";
+
+    $medico = new Medico($_SESSION["email"]);
+    $nome = $nomeErr= $optionsPacientes = $lista =$err = "";
     $method = $_SERVER["REQUEST_METHOD"];
+
+    $pacientes = $medico->pacientes();
+    foreach ($pacientes as $paciente) {
+
+        $optionsPacientes .= "<option name='optionsPacientes' value='" . $paciente->id . "'>" . $paciente->nome . "</option>";
+    }
+
     if ($method == "POST") {
-        $nome = $_POST["nome"];
-        $buscados = busca("paciente", array(array("nome", $nome)), false);
-        $pacreg = "";
-        foreach ($buscados as $buscado) {
-            if ($buscado->nome == $nome) {
-                $pacreg = $buscado->registro;
-            }
-        }
-        if ($pacreg == "") {
-            echo "<br>Paciente não encontrado!<br>";
-        } else {
-            $consultas = simplexml_load_file("../../XMLs/consultas.xml");
+        $pacienteID= $_POST["pacienteID"];
+        $consultas=$medico->historico($pacienteID);
+        $lista.= "<hr>";
+        if($consultas!=null){
+            $lista.= "<p> O paciente escolhido tem um total de ". $medico->countConsultas .  " consultas com Você</p><hr>";
             foreach ($consultas as $consulta) {
-                if ((int)$consulta->medico == $_SESSION["registro"] && (int)$consulta->paciente == $pacreg) {
-                    $lista .= "Data da Consulta: " . $consulta->data . "<br>";
-                    $lista .= "Receita: " . $consulta->receita . "<br>";
-                    $lista .= "Observacao: " . $consulta->observacao . "<br><hr><br>";
-                }
+                $lista .= "Observação: " . $consulta->observação . "<br>";
+                $lista .= "Receita: " . $consulta->receita . "<br>";
+                $lista .= "Data: " . $consulta->data . "<br><hr><br>";
             }
-            if ($lista == "") {
-                $lista = "<h4>Lista Vazia</h4>";
-            }
+        }else{
+            $lista = "<h4>Sem consultas com esse paciente</h4>";
+        
         }
     }
     ?>
@@ -83,18 +81,24 @@
     <div class="container" align="center">
     
         <h1>Historico de Consultas</h1>
-
-        <label for="nome">Nome do paciente:</label>
-        <input type="text" class="form-control" name="nome" id="nome" required value="<?php echo $nome; ?>"><br><br><br>
-        <span class="error"><?php echo $nomeErr; ?></span><br><br>
-
-        <button type="submit" class="btn btn-primary"  nameP="submit" value="Procurar">Procurar paciente</button>
-
-
+        <div>
+            <center>
+                <div>
+                    <label for="pacienteID">Paciente:</label>
+                    <select name="pacienteID" class="form-control" id="pacienteID" required>
+                            <?php echo $optionsPacientes; ?>
+                    </select>
+                </div>
+                <br>
+                <div>
+                    <button type="submit" class="btn btn-primary"  nameP="submit" value="verificar">Verificar consultas</button>
+                </div>
+            </center>
+        </div>
+    <?php echo $lista; ?>
     </div>
 </form>
 
-<?php echo $lista; ?>
 
 <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous"></script>
 <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js" integrity="sha384-9/reFTGAW83EW2RDu2S0VKaIzap3H66lZH81PoYlFhbGU+6BZp6G7niu735Sk7lN" crossorigin="anonymous"></script>

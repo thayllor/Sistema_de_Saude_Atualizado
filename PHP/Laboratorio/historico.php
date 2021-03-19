@@ -35,10 +35,9 @@
     if($_SESSION["type"] != "laboratorio"){
         redirect("./../Login/login.php");
     }
-    $err = "";
     $lab= new Lab($_SESSION["email"]);
     $method = $_SERVER["REQUEST_METHOD"];
-    $lista= $optionsPacientes="";
+    $lista= $optionsPacientes=$err = "";
     #options com os pacientes
     $pacientes = $lab->pacientes();
     foreach ($pacientes as $paciente) {

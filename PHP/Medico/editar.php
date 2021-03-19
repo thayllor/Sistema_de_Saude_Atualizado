@@ -20,6 +20,7 @@
 <body>
 
     <?php
+    include_once("./con_medico.php");
     include "../functions.php";
     session_start();
     if (count($_SESSION) == 0) {
@@ -29,65 +30,35 @@
         redirect("./../Login/login.php");
     }
 
-
+    $medico= new Medico($_SESSION["email"] );
     // define variables and set to empty values
     $emailErr = $nomeErr = $crmErr = $senhaErr= $telefoneErr= "";
-    $email = $senha = $nome = $endereco = $telefone = $crm = $especialidade = "";
+    $email = $senha = $nome = $endereco = $telefone = $crm = $especialidade = $idade= "";
     $method = $_SERVER["REQUEST_METHOD"];
     if ($method == "POST") {
+        
         $email = $_POST["email"];
         $senha = $_POST["senha"];
         $nome = $_POST["nome"];
         $endereco = $_POST["endereco"];
         $telefone = $_POST["telefone"];
+        $idade= $_POST["idade"];
         $crm = $_POST["crm"];
         $especialidade = $_POST["especialidade"];
         $crm = clearString($crm);
         $telefone = clearString($telefone);
-        $buscados = busca("medico", array(array("email", $email), array("nome", $nome), array("crm", $crm)), false);
-
-        foreach ($buscados as $buscado) {
-            if ((int)$buscado->registro != (int)$_SESSION["registro"]) {
-
-
-                if ((string)$buscado->nome == (string)$nome) {
-                    $nomeErr = "Nome em Uso";
-                }
-                if ((string)$buscado->email == (string)$email) {
-                    $emailErr = "Email em Uso";
-                }
-                if ((string)$buscado->crm == (string)$crm) {
-                    $crmErr = "Crm em Uso";
-                }
-            }
+        $err= $medico->editar($email,$senha,$nome,$endereco,$especialidade,$telefone,$crm,$idade);
+        if($err=="nome"){
+            $nomeErr = "Nome em Uso";
+        }elseif($err=="email"){
+            $emailErr = "Email em Uso";
+        }elseif($err=="crm"){
+            $cnpjErr = "Crm em Uso";
         }
-        if (!($nomeErr != "" || $emailErr != "" || $crmErr != "")) {
-            $xml = simplexml_load_file("../../XMLs/medicos.xml");
-            foreach ($xml as $med) {
-
-                //echo $xml[$i]->registro . " = " . $_SESSION["registro"] . "<br>";
-                if ((int)$med->registro == (int)$_SESSION["registro"]) {
-                    $med->nome = $nome;
-                    $med->email = $email;
-                    $med->senha = $senha;
-                    $med->telefone = $telefone;
-                    $med->endereco = $endereco;
-                    $med->crm = $crm;
-                    $med->especialidade = $especialidade;
-                    break 1;
-                }
-            }
-            $xml->saveXML("../../XMLs/medicos.xml");
-            $_SESSION["email"] = $email;
-            $_SESSION["senha"] = $senha;
-            echo "<br>Dados Alterados<br>";
-        }
-    } else {
-        $medico = checkUser($_SESSION["email"], $_SESSION["senha"], $_SESSION["type"]);
-
-        if ($medico == false) {
-            //redireciona pro login
-        }
+        $_SESSION["email"] = $email;
+        $_SESSION["senha"] = $senha;
+        redirect("index.php");
+    }else{
         $email = $medico->email;
         $senha = $medico->senha;
         $nome = $medico->nome;
@@ -122,7 +93,7 @@
 <div class="container">
     <center>
     <h1>Atualize seus dados</h1>
-    <form method="post" id="editar_medico_form">
+    <form method="post" id="editar_medico_form" action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]); ?>">
     <div class="form-row">
         <div class="col">
             <label for="nome">Nome:</label>
