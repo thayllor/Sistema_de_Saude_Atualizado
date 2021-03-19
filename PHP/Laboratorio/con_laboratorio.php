@@ -76,10 +76,11 @@ class Lab{
 
 	public function editar($email,$senha,$nome,$endereco,$telefone,$cnpj,$tipos){
 		
-		$rs= $this->conexao->prepare("SELECT * FROM laboratorios WHERE (email = ? OR nome = ? OR cnpj = ? ) ");
+		$rs= $this->conexao->prepare("SELECT * FROM laboratorios WHERE ((email = ? OR nome = ? OR cnpj = ?) AND ( id <> ? )) ");
 		$rs->bindParam(1, $email);
 		$rs->bindParam(2, $nome);
 		$rs->bindParam(3, $cnpj);
+		$rs->bindParam(4, $this->id);
 		$rs->execute();
 		$row=$rs->fetch(PDO::FETCH_OBJ);
 		if($row->email== $email){
@@ -92,7 +93,7 @@ class Lab{
 			return"cnpj";
 
 		}else{
-			$rs= $this->conexao->prepare("UPDATE laboratorios SET email = ?, senha = ?, nome = ?, endereco = ?, telefone + ?, cnpj = ?, tipos = ? WHERE id = ?");
+			$rs= $this->conexao->prepare("UPDATE laboratorios SET email = ?, senha = ?, nome = ?, endereco = ?, telefone = ?, cnpj = ?, tipos = ? WHERE id = ?");
 			$rs->bindParam(1, $email);
 			$rs->bindParam(2, $senha);
 			$rs->bindParam(3, $nome);

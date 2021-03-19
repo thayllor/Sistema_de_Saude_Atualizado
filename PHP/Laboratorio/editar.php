@@ -36,7 +36,7 @@
     // define variables and set to empty values
     $lab= new Lab($_SESSION["email"]);
     $emailErr = $nomeErr = $cnpjErr = "";
-    $email = $senha = $nome = $endereco = $telefone = $cnpj = $tiposExames = $emailErr= "";
+    $email = $senha = $nome = $endereco = $telefone = $cnpj = $tiposExames = $tipos = $emailErr= "";
     $telefoneErr = $senhaErr= "";
     $method = $_SERVER["REQUEST_METHOD"];
     if ($method == "POST") {
@@ -47,7 +47,7 @@
         $endereco = $_POST["endereco"];
         $telefone = $_POST["telefone"];
         $cnpj = $_POST["cnpj"];
-        $tiposExames = $_POST["tiposExames"];
+        $tipos = $_POST["tiposExames"];
         $cnpj = clearString($cnpj);
         $telefone = clearString($telefone);
         $err=$lab->editar($email,$senha,$nome,$endereco,$telefone,$cnpj,$tipos);
@@ -109,7 +109,7 @@
                 
             </div>
             <div class="col">
-                <label for="tiposExamese">Tipos de exame:</label>
+                <label for="tiposExames">Tipos de exame:</label>
                 <input type="text" class="form-control" id="tiposExames" placeholder="Digite os tipos de exame que o laboratorio tem aqui" name="tiposExames" required value="<?php echo $tiposExames; ?>"><br>
             </div>
         </div>

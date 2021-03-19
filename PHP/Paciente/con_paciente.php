@@ -50,10 +50,11 @@ class Pac{
 
 	public function editar($email,$senha,$nome,$endereco,$telefone,$cpf,$genero,$idade){
 		
-		$rs= $this->conexao->prepare("SELECT * FROM pacientes WHERE (email = ? OR nome = ? OR cpf = ? ) ");
+		$rs= $this->conexao->prepare("SELECT * FROM pacientes WHERE ((email = ? OR nome = ? OR cpf = ?) AND ( id <> ? )); ");
 		$rs->bindParam(1, $email);
 		$rs->bindParam(2, $nome);
 		$rs->bindParam(3, $cpf);
+		$rs->bindParam(4, $this->id);
 		$rs->execute();
 		$row=$rs->fetch(PDO::FETCH_OBJ);
 		if($row->email== $email){
@@ -66,7 +67,7 @@ class Pac{
 			return"cpf";
 
 		}else{
-			$rs= $this->conexao->prepare("UPDATE pacientes SET email = ?, senha = ?, nome = ?, endereco = ?, telefone + ?, cpf = ?, genero = ?, idade = ? WHERE id = ?");
+			$rs= $this->conexao->prepare("UPDATE pacientes SET email = ?, senha = ?, nome = ?, endereco = ?, telefone = ?, cpf = ?, genero = ?, idade = ? WHERE id = ?");
 			$rs->bindParam(1, $email);
 			$rs->bindParam(2, $senha);
 			$rs->bindParam(3, $nome);
