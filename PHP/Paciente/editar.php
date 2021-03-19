@@ -21,6 +21,7 @@
 <body>
 
     <?php
+    include_once("./con_paciente.php");
     include "../functions.php";
     session_start();
     if (count($_SESSION) == 0) {
@@ -32,6 +33,7 @@
 
 
     // define variables and set to empty values
+    $pac= new Pac($_SESSION["email"]);
     $emailErr = $nomeErr = $cpfErr = $telefoneErr = $senhaErr = "";
     $email = $senha = $genero = $nome = $endereco = $telefone = $cpf = $idade = "";
     $method = $_SERVER["REQUEST_METHOD"];
@@ -44,63 +46,31 @@
         $telefone = $_POST["telefone"];
         $genero = $_POST["genero"];
         $cpf = $_POST["cpf"];
-        $genero = $_POST["genero"];
         $idade = $_POST["idade"];
-        $buscados = busca("paciente", array(array("email", $email), array("nome", $nome), array("cpf", $cpf)), false);
         $cpf = clearString($cpf);
         $telefone = clearString($telefone);
-        foreach ($buscados as $buscado) {
-            if ((int)$buscado->registro != (int)$_SESSION["registro"]) {
-
-
-                if ((string)$buscado->nome == (string)$nome) {
-                    $nomeErr = "Nome em Uso";
-                }
-                if ((string)$buscado->email == (string)$email) {
-                    $emailErr = "Email em Uso";
-                }
-                if ((string)$buscado->cpf == (string)$cpf) {
-                    $cpfErr = "CPF em Uso";
-                }
-            }
+        $err=$pac->editar($email,$senha,$nome,$endereco,$telefone,$cpf,$genero,$idade);
+        if($err=="nome"){
+            $nomeErr = "Nome em Uso";
+        }elseif($err=="email"){
+            $emailErr = "Email em Uso";
+        }elseif($err=="cnpj"){
+            $cnpjErr = "Cnpj em Uso";
         }
-        if (!($nomeErr != "" || $emailErr != "" || $cpfErr != "")) {
-            $xml = simplexml_load_file("../../XMLs/pacientes.xml");
-            foreach ($xml as $pac) {
-
-                //echo $xml[$i]->registro . " = " . $_SESSION["registro"] . "<br>";
-                if ((float)$pac->registro == (float)$_SESSION["registro"]) {
-                    $pac->nome = $nome;
-                    $pac->email = $email;
-                    $pac->senha = $senha;
-                    $pac->genero = $genero;
-                    $pac->telefone = $telefone;
-                    $pac->endereco = $endereco;
-                    $pac->cpf = $cpf;
-                    $pac->idade = $idade;
-                    break 1;
-                }
-            }
-            $xml->saveXML("../../XMLs/pacientes.xml");
+        
             $_SESSION["email"] = $email;
             $_SESSION["senha"] = $senha;
-            echo "<br>Dados Alterados<br>";
-        }
+            redirect("index.php");
+        
     } else {
-        $paciente = checkUser($_SESSION["email"], $_SESSION["senha"], $_SESSION["type"]);
-
-        if ($paciente == false) {
-            //redireciona pro login
-        }
-        $email = $paciente->email;
-        $senha = $paciente->senha;
-        $nome = $paciente->nome;
-        $endereco = $paciente->endereco;
-        $telefone = $paciente->telefone;
-        $cpf = $paciente->cpf;
-        $genero = $paciente->genero;
-        $idade = $paciente->idade;
-        $tiposExames = $paciente->tiposExames;
+        $email = $pac->email;
+        $senha = $pac->senha;
+        $nome = $pac->nome;
+        $endereco = $pac->endereco;
+        $telefone = $pac->telefone;
+        $cpf = $pac->cpf;
+        $genero = $pac->genero;
+        $idade = $pac->idade;
     }
 
     $options = "";

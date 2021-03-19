@@ -104,7 +104,7 @@ class Admin{
 			return"nome";
 		}
 		else{
-			$stmt = $this->conexao->prepare("INSERT INTO medicos(email,senha,nome,endereco,telefone,cnpj,tipos) VALUES(?, ?, ?, ?, ?, ?, ?)");
+			$stmt = $this->conexao->prepare("INSERT INTO laboratorios(email,senha,nome,endereco,telefone,cnpj,tipos) VALUES(?, ?, ?, ?, ?, ?, ?)");
 			$stmt->bindParam(1, $email);
 			$stmt->bindParam(2, $senha);
 			$stmt->bindParam(3, $nome);

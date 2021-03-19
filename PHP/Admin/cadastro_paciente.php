@@ -21,6 +21,7 @@
 <body>
 
     <?php
+    include "../functions.php";
     include_once('con_admin.php');
     session_start();
     if (count($_SESSION) == 0) {
@@ -48,7 +49,7 @@
         $idade = $_POST["idade"];
         $err=$admin->salva_paciente($email,$senha,$nome,$endereco,$telefone,$cpf,$genero,$idade );
         if($err=="sucesso"){
-            $emailErr = $nomeErr = $cpfErr = $telefoneErr = $senhaErr = "";
+            $emailErr = $nomeErr = $cpfErr = $telefoneErr = $senhaErr = $err = "";
             redirect("index.php");
         }elseif($err=="email"){
             $emailErr="email em uso";

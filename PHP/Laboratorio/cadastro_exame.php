@@ -87,7 +87,7 @@
     <div class="container" align="center" >
     <span class="error" id="consistenciaERR"><?php echo $consistenciaERR; ?></span>
         <div class="col" align="center">
-            <label for="paciente">Paciente:</label>
+            <label for="pacienteID">Paciente:</label>
             <select name="pacienteID" class="form-control" id="pacienteID" required>
                 <?php echo $optionsPacientes; ?>
             </select>

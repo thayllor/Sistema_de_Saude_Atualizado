@@ -21,7 +21,9 @@
 <body>
 
     <?php
+    include_once("./con_paciente.php");
     include "../functions.php";
+
     session_start();
     if (count($_SESSION) == 0) {
         redirect("./../Login/login.php");
@@ -29,34 +31,36 @@
     if($_SESSION["type"] != "paciente"){
         redirect("./../Login/login.php");
     }
-    $paciente = checkUser($_SESSION["email"], $_SESSION["senha"], $_SESSION["type"]);
-    $err = "";
+
+    $pac = new Pac($_SESSION["email"]);
+    $lista = $optionsLabs =$N_exames ="";
     $method = $_SERVER["REQUEST_METHOD"];
-    $laboratorios = simplexml_load_file("../../XMLs/laboratorios.xml");
-    $exames = simplexml_load_file("../../XMLs/exames.xml");
-    $lista = "";
-    foreach ($laboratorios as $lab) {
-        $found = false;
-        foreach ($exames as $exame) {
-            if ((int)$exame->paciente == (int)$paciente->registro && (int)$exame->laboratorio == (int)$lab->registro) { 
-                if (!$found) {
-                    $lista .= "<div id = '" . $lab->registro . "'><button onclick='mostrarHistorico(" . $lab->registro . ")'>
-                    " . $lab->nome . "
-                    </button><br><br><div id='" . $lab->registro . "-historico' style='display: none;'>";
-                    $found = true;
+    $labs = $pac->laboratorios();
+    foreach ($labs as $lab) {
+
+        $optionsLabs .= "<option name='optionsLabs' value='" . $lab->id . "'>" . $lab->nome . "</option>";
+    }
+
+    if($method == "POST"){
+
+        $laboratorioID = $_POST["Laboratorio"];
+
+        $exames=$pac->exames($laboratorioID);
+        $lista.= "<br><hr>";
+         #faz os exames
+        if($exames!=null){
+            $lista.= "<p> Você tem um total de ". $pac->countExames .  " exames no laboratorio escolhido</p> <br><hr>";
+                foreach ($exames as $exame) {
+                    $lista .= "Tipo do Exame: " . $exame->tipo . "<br>";
+                    $lista .= "Resultado: " . $exame->resultado . "<br>";
+                    $lista .= "Data: " . $exame->data . "<br><hr><br>";
                 }
-                $lista .= "Tipo do Exame: " . $exame->tipoExame . "<br>";
-                $lista .= "Resultado: " . $exame->resultado . "<br>";
-                $lista .= "Data: " . $exame->data . "<br><hr><br>";
-            }
-        }
-        if ($found) {
-            $lista .= "</div></div>";
+            
+        }else{
+            $lista = "<h4>Sem exames nesse laboratorio</h4>";
         }
     }
-    if ($lista == "") {
-        $lista = "<h4>Lista Vazia</h4>";
-    }
+
     ?>
 
 <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
@@ -77,9 +81,23 @@
 
 
     <h1>Historico de Exames</h1>
-    <?php echo $lista; ?>
+<form method="post" id="cadastro_form" action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]); ?>">
+    <div class="col" align="center">
+        <label for="Laboratorio">Laboratórios:</label>
+        <select name="Laboratorio" class="form-control" id="Laboratorio" required>
+            <?php echo $optionsLabs; ?>
+        </select>
+    </div>
+    <div class="col" align="center">
+        <button type="submit" class="btn btn-primary"  nameP="submit" value="Verificar">Verificar Historico</button>
+    </div>
+</form>
 
+
+    <?php echo $lista; ?>
+    
 </div>
+    
 <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous"></script>
 <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js" integrity="sha384-9/reFTGAW83EW2RDu2S0VKaIzap3H66lZH81PoYlFhbGU+6BZp6G7niu735Sk7lN" crossorigin="anonymous"></script>
 <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js" integrity="sha384-B4gt1jrGC7Jh4AgTPSdUtOBvfO8shuf57BaghqFfPlYxofvL8/KUEfYiJOMMV+rV" crossorigin="anonymous"></script>

@@ -43,16 +43,17 @@
         $telefone = $_POST["telefone"];
         $cnpj = $_POST["cnpj"];
         $tiposExames = $_POST["tiposExames"];
-        $err=$admin->salva_laboratorio($email,$senha,$nome,$endereco,$telefone,$cnpj,$tipos);
+        $err=$admin->salva_laboratorio($email,$senha,$nome,$endereco,$telefone,$cnpj,$tiposExames);
         if($err=="sucesso"){
             $emailErr = $nomeErr = $crmErr = $telefoneErr = $senhaErr = "";
             redirect("index.php");
         }elseif($err=="email"){
             $emailErr="email em uso";
-
         }elseif($err=="cnpj"){
+
             $crmErr="CNPJ em uso";
         }elseif($err=="nome"){
+
             $nomeErr="Nome já cadastrado";
         }
     }

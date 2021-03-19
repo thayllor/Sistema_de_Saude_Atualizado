@@ -21,6 +21,7 @@
 <body>
 
     <?php
+    include_once("./con_paciente.php");
     include "../functions.php";
 
     session_start();
@@ -31,33 +32,33 @@
         redirect("./../Login/login.php");
     }
 
-    $paciente = checkUser($_SESSION["email"], $_SESSION["senha"], $_SESSION["type"]);
-
-    $lista = "";
-
+    $pac = new Pac($_SESSION["email"]);
+    $lista =$optionsMedicos= "";
     $method = $_SERVER["REQUEST_METHOD"];
+    $medicos = $pac->medicos();
+    foreach ($medicos as $medico) {
 
-    $consultas = simplexml_load_file("../../XMLs/consultas.xml");
-
-    foreach ($consultas as $consulta) {
-        if ((int)$consulta->paciente == $_SESSION["registro"]) {
-
-            $buscados = busca("medico", array(array("registro", (int)$consulta->medico)), false);
-            $nomemedico = "";
-            foreach ($buscados as $buscado) {
-                if ($buscado->registro == (int)$consulta->medico) {
-                    $nomemedico = $buscado->nome;
-                }
-            }
-
-            $lista .= "Data da Consulta: " . $consulta->data . "<br>";
-            $lista .= "Receita: " . $consulta->receita . "<br>";
-            $lista .= "Nome do Médico: " . $nomemedico . "<br><hr><br>";
-        }
+        $optionsMedicos .= "<option name='optionsMedicos' value='" . $medico->id . "'>" . $medico->nome . "</option>";
     }
 
-    if ($lista == "") {
-        $lista = "<h4>Lista Vazia</h4>";
+    if($method == "POST"){
+
+        $medicoID = $_POST["Medico"];
+
+        $consultas=$pac->consultas($medicoID);
+        $lista.= "<br><hr>";
+         #faz os exames
+        if($consultas!=null){
+            $lista.= "<p> Você tem um total de ". $pac->countConsultas .  " consultas com o medico escolhido</p> <br><hr>";
+                foreach ($consultas as $consulta) {
+                    $lista .= "Observação: " . $consulta->observação . "<br>";
+                    $lista .= "Receita: " . $consulta->receita . "<br>";
+                    $lista .= "Data: " . $consulta->data . "<br><hr><br>";
+                }
+            
+        }else{
+            $lista = "<h4>Sem consultas com esse medico</h4>";
+        }
     }
 
     ?>
@@ -80,6 +81,19 @@
 
 
     <h1>Historico de Consultas</h1>
+<form method="post" id="cadastro_form" action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]); ?>">
+    <div class="col" align="center">
+        <label for="Medico">Medico:</label>
+        <select name="Medico" class="form-control" id="Medico" required>
+            <?php echo $optionsMedicos; ?>
+        </select>
+    </div>
+    <div class="col" align="center">
+        <button type="submit" class="btn btn-primary"  nameP="submit" value="Verificar">Verificar Historico</button>
+    </div>
+</form>
+
+
     <?php echo $lista; ?>
     
 </div>

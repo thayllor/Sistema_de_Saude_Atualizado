@@ -25,6 +25,7 @@
 <body>
 
     <?php
+    include_once('con_laboratorio.php');
     include "../functions.php";
 
     session_start();
@@ -34,39 +35,36 @@
     if($_SESSION["type"] != "laboratorio"){
         redirect("./../Login/login.php");
     }
-    $laboratorio = checkUser($_SESSION["email"], $_SESSION["senha"], $_SESSION["type"]);
-
     $err = "";
-
+    $lab= new Lab($_SESSION["email"]);
     $method = $_SERVER["REQUEST_METHOD"];
-
-    $pacientes= simplexml_load_file("../../XMLs/pacientes.xml");
-    $exames = simplexml_load_file("../../XMLs/exames.xml");
-
-    $lista = "";
+    $lista= $optionsPacientes="";
+    #options com os pacientes
+    $pacientes = $lab->pacientes();
     foreach ($pacientes as $paciente) {
-        $found = false;
-        foreach ($exames as $exame) {
-            if ((int)$exame->paciente == (int)$paciente->registro && (int)$exame->laboratorio == (int)$laboratorio->registro) {
-                if (!$found) {
-                    $lista .= "<div id = '" . $paciente->registro . "'><button class='btn btn-primary btn-lg btn-block' onclick='mostrarHistorico(" . $paciente->registro . ")'>
-                    " . $paciente->nome . "
-                    </button><br><br><div id='" . $paciente->registro . "-historico' style='display: none;'>";
-                    $found = true;
-                    ;
-                }
-                $lista .= "Tipo do Exame: " . $exame->tipoExame . "<br>";
+
+        $optionsPacientes .= "<option name='optionsPacientes' value='" . $paciente->id . "'>" . $paciente->nome . "</option>";
+    }
+
+
+    if ($method == "POST") {
+        $pacienteID= $_POST["pacienteID"];
+        $exames=$lab->historico($pacienteID);
+        $lista.= "<br><hr>";
+         #faz os exames
+        if($exames!=null){
+            $lista.= "<p> O paciente escolhido tem um total de ". $lab->countExames .  " exames no seu laboratorio</p> <br><hr>";
+            foreach ($exames as $exame) {
+                $lista .= "Tipo do Exame: " . $exame->tipo . "<br>";
                 $lista .= "Resultado: " . $exame->resultado . "<br>";
                 $lista .= "Data: " . $exame->data . "<br><hr><br>";
             }
-        }
-        if ($found) {
-            $lista .= "</div></div>";
+        }else{
+            $lista = "<h4>Sem exames com esse paciente</h4>";
         }
     }
-    if ($lista == "") {
-        $lista = "<h4>Lista Vazia</h4>";
-    }
+        
+   
     ?>
 
 <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
@@ -88,6 +86,23 @@
     <center>
         <h1>Historico de Exames</h1>
     </center>
+    <div>
+   <form method="post" id="historico_lab" action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]); ?>">
+        <center>
+        <div>
+            <label for="pacienteID">Paciente:</label>
+            <select name="pacienteID" class="form-control" id="pacienteID" required>
+                    <?php echo $optionsPacientes; ?>
+            </select>
+        </div>
+        <div>
+            <button type="submit" class="btn btn-primary"  nameP="submit" value="Cadastrar">Verificar Historico</button>
+        </div>
+            
+        </center>
+
+    </form>
+    </div>
     <?php echo $lista; ?>
 </div>
     

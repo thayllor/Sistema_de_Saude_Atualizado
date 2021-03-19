@@ -22,6 +22,7 @@
 <body>
 
     <?php
+    include_once('con_laboratorio.php');
     include "../functions.php";
     session_start();
     if (count($_SESSION) == 0) {
@@ -33,6 +34,7 @@
 
 
     // define variables and set to empty values
+    $lab= new Lab($_SESSION["email"]);
     $emailErr = $nomeErr = $cnpjErr = "";
     $email = $senha = $nome = $endereco = $telefone = $cnpj = $tiposExames = $emailErr= "";
     $telefoneErr = $senhaErr= "";
@@ -46,59 +48,28 @@
         $telefone = $_POST["telefone"];
         $cnpj = $_POST["cnpj"];
         $tiposExames = $_POST["tiposExames"];
-        $buscados = busca("laboratorio", array(array("email", $email), array("nome", $nome),
-         array("cnpj", $cnpj)), false);
-
         $cnpj = clearString($cnpj);
         $telefone = clearString($telefone);
-        foreach ($buscados as $buscado) {
-            if ((float)$buscado->registro != (float)$_SESSION["registro"]) {
-
-
-                if ((string)$buscado->nome == (string)$nome) {
-                    $nomeErr = "Nome em Uso";
-                }
-                if ((string)$buscado->email == (string)$email) {
-                    $emailErr = "Email em Uso";
-                }
-                if ((string)$buscado->cnpj == (string)$cnpj) {
-                    $cnpjErr = "Cnpj em Uso";
-                }
-            }
+        $err=$lab->editar($email,$senha,$nome,$endereco,$telefone,$cnpj,$tipos);
+        if($err=="nome"){
+            $nomeErr = "Nome em Uso";
+        }elseif($err=="email"){
+            $emailErr = "Email em Uso";
+        }elseif($err=="cnpj"){
+            $cnpjErr = "Cnpj em Uso";
         }
-        if (!($nomeErr != "" || $emailErr != "" || $cnpjErr != "")) {
-            $xml = simplexml_load_file("../../XMLs/laboratorios.xml");
-            foreach ($xml as $lab) {
-
-               
-                if ((float)$lab->registro == (float)$_SESSION["registro"]) {
-                    $lab->nome = $nome;
-                    $lab->email = $email;
-                    $lab->senha = $senha;
-                    $lab->telefone = $telefone;
-                    $lab->endereco = $endereco;
-                    $lab->cnpj = $cnpj;
-                    $lab->tiposExames = $tiposExames;
-                    break 1;
-                }
-            }
-            $xml->saveXML("../../XMLs/laboratorios.xml");
+        
             $_SESSION["email"] = $email;
             $_SESSION["senha"] = $senha;
-            echo "<br>Dados Alterados<br>";
-        }
+            redirect("index.php");
     } else {
-        $laboratorio = checkUser($_SESSION["email"], $_SESSION["senha"], $_SESSION["type"]);
-        if ($laboratorio == false) {
-            //redireciona pro login
-        }
-        $email = $laboratorio->email;
-        $senha = $laboratorio->senha;
-        $nome = $laboratorio->nome;
-        $endereco = $laboratorio->endereco;
-        $telefone = $laboratorio->telefone;
-        $cnpj = $laboratorio->cnpj;
-        $tiposExames = $laboratorio->tiposExames;
+        $email = $lab->email;
+        $senha = $lab->senha;
+        $nome = $lab->nome;
+        $endereco = $lab->endereco;
+        $telefone = $lab->telefone;
+        $cnpj = $lab->cnpj;
+        $tiposExames = $lab->tipos;
     }
 
     ?>
